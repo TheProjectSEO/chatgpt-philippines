@@ -66,7 +66,7 @@ export default function GrammarCheckerPage() {
       const mockErrors: GrammarError[] = [
         {
           id: '1',
-          type: 'grammar',
+          type: 'grammar' as ErrorType,
           message: 'Subject-verb agreement',
           explanation: `The subject 'students' is plural, so it should be followed by 'were' instead of 'was'.`,
           suggestion: 'were',
@@ -76,7 +76,7 @@ export default function GrammarCheckerPage() {
         },
         {
           id: '2',
-          type: 'spelling',
+          type: 'spelling' as ErrorType,
           message: 'Possible spelling mistake',
           explanation: `Did you mean 'received'? This is a common spelling error.`,
           suggestion: 'received',

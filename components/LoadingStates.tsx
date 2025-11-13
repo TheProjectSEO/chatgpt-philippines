@@ -91,7 +91,9 @@ export function SkeletonCard({ className = '' }: { className?: string }) {
       <div style={{ display: 'flex', gap: 'var(--space-4)', marginBottom: 'var(--space-4)' }}>
         <Skeleton variant="circular" width={48} height={48} />
         <div style={{ flex: 1 }}>
-          <Skeleton width="60%" height="20px" style={{ marginBottom: 'var(--space-2)' }} />
+          <div style={{ marginBottom: 'var(--space-2)' }}>
+            <Skeleton width="60%" height="20px" />
+          </div>
           <Skeleton width="40%" height="16px" />
         </div>
       </div>
@@ -112,13 +114,9 @@ export function SkeletonMessage({ isUser = false }: { isUser?: boolean }) {
     >
       <Skeleton variant="circular" width={36} height={36} />
       <div style={{ flex: 1, maxWidth: '70%' }}>
-        <Skeleton
-          height="60px"
-          style={{
-            borderRadius: 'var(--radius-lg)',
-            marginBottom: 'var(--space-1)'
-          }}
-        />
+        <div style={{ borderRadius: 'var(--radius-lg)', marginBottom: 'var(--space-1)' }}>
+          <Skeleton height="60px" />
+        </div>
         <Skeleton width="80px" height="12px" />
       </div>
     </div>

@@ -764,8 +764,9 @@ export default function ChatPage() {
                           <div className="prose prose-sm max-w-none prose-headings:text-[#1C1917] prose-p:text-[#44403C] prose-a:text-[#E8844A] prose-code:text-[#E8844A] prose-code:bg-[#FFF4ED]">
                             <ReactMarkdown
                               components={{
-                                code({ node, inline, className, children, ...props }) {
+                                code({ node, className, children, ...props }: any) {
                                   const match = /language-(\w+)/.exec(className || '');
+                                  const inline = !className;
                                   return !inline && match ? (
                                     <SyntaxHighlighter
                                       style={oneDark}

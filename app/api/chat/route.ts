@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
 
             // Track usage in database (async, don't block response)
             trackModelUsage({
-              user_id: session?.user?.sub || null,
+              user_id: null, // TODO: Add session?.user?.sub when auth is fixed
               model: selectedModel,
               input_tokens: inputTokens,
               output_tokens: outputTokens,
