@@ -1,0 +1,36 @@
+# Prometheus Configuration
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'chatgpt-philippines'
+    environment: 'production'
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Scrape configurations
+scrape_configs:
+  # Application metrics
+  - job_name: 'chatgpt-philippines'
+    static_configs:
+      - targets: ['app:3000']
+    metrics_path: '/api/monitoring/metrics'
+    scrape_interval: 10s
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Redis exporter (optional - requires redis_exporter container)
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+# Recording rules
+rule_files:
+  - 'alerts.yml'
