@@ -829,7 +829,7 @@ export default function AIHumanizerPage() {
               },
               {
                 q: 'How is this different from just asking ChatGPT to make it natural?',
-                a: 'ChatGPT uses generic prompting and isn\'t specifically trained for humanization. Our tool uses fine-tuned models trained on thousands of human texts with advanced instructions to optimize sentence variety, length, and flow. We\'re constantly updated with new AI detection patterns - ChatGPT isn\'t.'
+                a: `ChatGPT uses generic prompting and isn't specifically trained for humanization. Our tool uses fine-tuned models trained on thousands of human texts with advanced instructions to optimize sentence variety, length, and flow. We're constantly updated with new AI detection patterns - ChatGPT isn't.`
               },
               {
                 q: 'Does humanizing change the meaning of my text?',
@@ -837,7 +837,7 @@ export default function AIHumanizerPage() {
               },
               {
                 q: 'Can I humanize content from other AI tools like Gemini or Claude?',
-                a: 'Yes! Our humanizer works with AI text from ANY source - ChatGPT, Gemini, Claude, Copilot, Perplexity, or any other AI writing tool. Just paste the AI-generated content and we\'ll transform it into natural, human-like text.'
+                a: `Yes! Our humanizer works with AI text from ANY source - ChatGPT, Gemini, Claude, Copilot, Perplexity, or any other AI writing tool. Just paste the AI-generated content and we'll transform it into natural, human-like text.`
               },
               {
                 q: 'What are the real risks of publishing unedited AI content?',

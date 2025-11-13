@@ -1,625 +1,1239 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+import Navbar from './components/Navbar';
 import {
-  Sparkles,
-  MessageSquare,
-  Image,
-  Mic,
-  Search,
-  Shield,
-  Users,
-  CheckCircle,
-  Globe,
-  FileText,
-  PenTool,
-  Presentation,
-  BookOpen,
-  BarChart,
+  MessageCircle,
+  CheckCircle2,
+  SpellCheck,
+  ShieldCheck,
+  ScanSearch,
+  FileCheck,
   Languages,
-  Star,
   Zap,
   Lock,
-  ChevronRight
+  Users,
+  Star,
+  ChevronRight,
+  ChevronDown,
+  Play,
+  ArrowRight,
+  Facebook,
+  Twitter,
+  Instagram,
 } from 'lucide-react';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Free ChatGPT Philippines - AI Chat, Generator & Tools',
-  description: 'Free ChatGPT Philippines powered by Claude AI. Image generator, translator, detector, character AI, plagiarism checker, and more AI tools for Filipino users.',
-  keywords: 'ChatGPT Philippines, free AI chat, image generator, AI detector, translate Tagalog, GPT chat, Perplexity AI, character AI, plagiarism checker, AI tools',
-  openGraph: {
-    title: 'Free ChatGPT Philippines - AI Chat, Generator & Tools',
-    description: 'Free AI-powered tools for Filipinos: chat, generate images, translate, check plagiarism, and more.',
-    type: 'website',
-  },
-};
 
 export default function Home() {
-  // JSON-LD structured data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "ChatGPT Philippines",
-    "description": "Free AI-powered ChatGPT for Filipino users. Chat, generate images, translate languages, check plagiarism, and access powerful AI tools.",
-    "url": "https://chatgpt-philippines.com",
-    "applicationCategory": "ProductivityApplication",
-    "operatingSystem": "Web",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "PHP"
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const features = [
+    {
+      icon: <MessageCircle size={32} />,
+      title: 'Natural Conversations',
+      description: 'Chat in Filipino or English naturally. Get instant answers, help with tasks, and creative ideas anytime.',
+      link: '/chat',
     },
-    "featureList": [
-      "AI Chat",
-      "Image Generator",
-      "Language Translator",
-      "AI Detector",
-      "Plagiarism Checker",
-      "Character AI",
-      "Content Makers",
-      "Perplexity AI"
-    ],
-    "inLanguage": ["en", "tl"],
-    "availableLanguage": ["English", "Tagalog", "Spanish"],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "1250"
-    }
-  };
+    {
+      icon: <SpellCheck size={32} />,
+      title: 'Grammar Checker',
+      description: 'Fix errors, improve writing, and ensure your messages are professional in both English and Tagalog.',
+      link: '/grammar-checker',
+    },
+    {
+      icon: <ShieldCheck size={32} />,
+      title: 'AI Detector',
+      description: 'Check if text was written by AI. Perfect for teachers, editors, and content reviewers.',
+      link: '/ai-detector',
+    },
+    {
+      icon: <ScanSearch size={32} />,
+      title: 'Plagiarism Checker',
+      description: 'Verify originality and find copied content. Keep your work authentic and properly cited.',
+      link: '/plagiarism-checker',
+    },
+    {
+      icon: <FileCheck size={32} />,
+      title: 'AI Humanizer',
+      description: 'Make AI-generated text sound more natural and human. Bypass AI detectors with ease.',
+      link: '/ai-humanizer',
+    },
+    {
+      icon: <Languages size={32} />,
+      title: 'Translator',
+      description: 'Translate between Tagalog, English, Spanish, and 100+ languages instantly and accurately.',
+      link: '/translator',
+    },
+  ];
+
+  const steps = [
+    {
+      number: '1',
+      title: 'Sign Up Free',
+      description: 'Create your account in 30 seconds. No credit card required, no hidden fees.',
+    },
+    {
+      number: '2',
+      title: 'Choose Your Tool',
+      description: 'Pick from our suite of AI tools - chat, translate, check grammar, detect AI, and more.',
+    },
+    {
+      number: '3',
+      title: 'Start Creating',
+      description: 'Get instant results. Save time, boost productivity, and achieve your goals faster.',
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: 'Maria Santos',
+      role: 'OFW in Dubai',
+      text: 'HeyGPT helps me write emails to my kids back home. The Tagalog translator is perfect, and I can practice my English too!',
+      rating: 5,
+    },
+    {
+      name: 'Juan dela Cruz',
+      role: 'College Student',
+      text: 'Game-changer for research papers! The AI detector helps me check my work, and the grammar checker saves me hours of editing.',
+      rating: 5,
+    },
+    {
+      name: 'Sarah Reyes',
+      role: 'BPO Employee',
+      text: 'I use the grammar checker every day at work. My emails are so much better now, and my boss noticed the improvement!',
+      rating: 5,
+    },
+  ];
+
+  const useCases = [
+    {
+      title: 'Write Emails Faster',
+      description: 'Compose professional emails in seconds. Perfect for work, school, or personal messages.',
+      icon: '✉️',
+    },
+    {
+      title: 'Study for Exams',
+      description: 'Get explanations, practice questions, and study summaries. Ace your tests with AI help.',
+      icon: '📚',
+    },
+    {
+      title: 'Translate Instantly',
+      description: 'Break language barriers. Communicate with anyone, anywhere in their language.',
+      icon: '🌐',
+    },
+    {
+      title: 'Check Your Work',
+      description: 'Ensure your writing is error-free and original before submitting assignments.',
+      icon: '✅',
+    },
+  ];
+
+  const faqs = [
+    {
+      question: 'Is HeyGPT really free forever?',
+      answer: 'Yes! Our core features are completely free with no time limits. You get unlimited conversations, grammar checking, translations, and AI detection. We believe AI should be accessible to all Filipinos.',
+    },
+    {
+      question: 'Do I need a credit card to sign up?',
+      answer: 'Not at all! Just sign up with your email or social account. No payment information required, ever.',
+    },
+    {
+      question: 'Can I use this for school work?',
+      answer: "Absolutely! Many students use HeyGPT for research, writing help, and study assistance. Just remember to review AI suggestions and follow your school's academic integrity policies.",
+    },
+    {
+      question: 'Does it work in Tagalog?',
+      answer: 'Yes! HeyGPT understands and speaks Tagalog fluently. You can chat, translate, and get help in both Filipino and English.',
+    },
+    {
+      question: 'How accurate is the AI detector?',
+      answer: 'Our AI detector is highly accurate, using advanced algorithms to identify AI-generated content. However, no detector is 100% perfect, so use it as a helpful guide.',
+    },
+    {
+      question: 'Is my data private and secure?',
+      answer: 'Yes! We take privacy seriously. Your conversations are encrypted, never shared with third parties, and you can delete your data anytime.',
+    },
+    {
+      question: 'Can I use this for work?',
+      answer: "Definitely! Professionals use HeyGPT for emails, presentations, translations, content creation, and more. It's perfect for BPO, freelancers, and business owners.",
+    },
+    {
+      question: 'What makes HeyGPT different from ChatGPT?',
+      answer: 'HeyGPT is built specifically for Filipino users with local language support, peso pricing (when applicable), and tools tailored to Philippine needs. Plus, you get multiple tools in one place!',
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      {/* Header/Navigation */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Sparkles className="w-8 h-8 text-emerald-600" />
-              <span className="text-xl font-bold text-gray-900">ChatGPT PH</span>
+    <>
+      <Navbar />
+
+      <main className="min-h-screen">
+        {/* Hero Section */}
+        <section className="hero-section">
+          <div className="container">
+            <div className="hero-content">
+              <span className="badge badge-primary">Free Forever</span>
+
+              <h1 className="hero-title">
+                Your AI Assistant for
+                <span className="gradient-text"> Philippines</span>
+              </h1>
+
+              <p className="hero-description">
+                Chat naturally in Filipino or English. Get instant answers, write better emails, translate languages, and boost your productivity - all completely free.
+              </p>
+
+              <div className="hero-actions">
+                <Link href="/signup" className="btn-primary btn-lg">
+                  <MessageCircle size={20} />
+                  Start Free Chat
+                </Link>
+                <Link href="#demo" className="btn-secondary btn-lg">
+                  <Play size={20} />
+                  Watch Demo
+                </Link>
+              </div>
+
+              <div className="hero-stats">
+                <div className="stat">
+                  <p className="stat-value">10,000+</p>
+                  <p className="stat-label">Filipino Users</p>
+                </div>
+                <div className="stat">
+                  <p className="stat-value">500,000+</p>
+                  <p className="stat-label">Chats</p>
+                </div>
+                <div className="stat">
+                  <p className="stat-value">4.8★</p>
+                  <p className="stat-label">User Rating</p>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/login"
-                className="text-gray-700 hover:text-gray-900 font-medium text-sm sm:text-base"
-              >
-                Log In
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="section">
+          <div className="container">
+            <div className="section-header">
+              <span className="overline">Features</span>
+              <h2 className="section-title">
+                Everything You Need in One Place
+              </h2>
+              <p className="section-description">
+                From AI chat to grammar checking, we've got all the tools Filipino users need to work smarter and faster
+              </p>
+            </div>
+
+            <div className="features-grid">
+              {features.map((feature, index) => (
+                <Link href={feature.link} key={index} className="feature-card">
+                  <div className="feature-icon">
+                    {feature.icon}
+                  </div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
+                  <span className="feature-link-text">
+                    Try it now <ArrowRight size={16} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="section bg-gradient-to-b from-white to-orange-50">
+          <div className="container">
+            <div className="section-header">
+              <span className="overline">How It Works</span>
+              <h2 className="section-title">
+                Get Started in 3 Simple Steps
+              </h2>
+              <p className="section-description">
+                No technical knowledge needed. Anyone can start using HeyGPT in minutes
+              </p>
+            </div>
+
+            <div className="steps-grid">
+              {steps.map((step, index) => (
+                <div key={index} className="step-card">
+                  <div className="step-number">{step.number}</div>
+                  <h3 className="step-title">{step.title}</h3>
+                  <p className="step-description">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Social Proof Section */}
+        <section className="section">
+          <div className="container">
+            <div className="section-header">
+              <span className="overline">Testimonials</span>
+              <h2 className="section-title">
+                Loved by Filipinos Worldwide
+              </h2>
+              <p className="section-description">
+                See what our users say about HeyGPT
+              </p>
+            </div>
+
+            <div className="testimonials-grid">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="testimonial-card">
+                  <div className="testimonial-stars">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} size={16} fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className="testimonial-text">"{testimonial.text}"</p>
+                  <div className="testimonial-author">
+                    <p className="author-name">{testimonial.name}</p>
+                    <p className="author-role">{testimonial.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section className="section bg-gradient-to-b from-white to-orange-50">
+          <div className="container">
+            <div className="section-header">
+              <span className="overline">Use Cases</span>
+              <h2 className="section-title">
+                Built for Real Filipino Needs
+              </h2>
+              <p className="section-description">
+                Whether you're a student, professional, or OFW - we've got you covered
+              </p>
+            </div>
+
+            <div className="use-cases-grid">
+              {useCases.map((useCase, index) => (
+                <div key={index} className="use-case-card">
+                  <span className="use-case-icon">{useCase.icon}</span>
+                  <h3 className="use-case-title">{useCase.title}</h3>
+                  <p className="use-case-description">{useCase.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Preview Section */}
+        <section className="section">
+          <div className="container">
+            <div className="pricing-preview">
+              <div className="pricing-content">
+                <span className="overline">Pricing</span>
+                <h2 className="pricing-title">
+                  Free Tier Has Everything You Need
+                </h2>
+                <p className="pricing-description">
+                  Get unlimited access to AI chat, grammar checker, translator, AI detector, and more. No credit card required.
+                </p>
+                <ul className="pricing-features">
+                  <li>
+                    <CheckCircle2 size={20} />
+                    <span>Unlimited AI conversations</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={20} />
+                    <span>Grammar checking in English & Tagalog</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={20} />
+                    <span>AI detection and plagiarism checking</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={20} />
+                    <span>Translation in 100+ languages</span>
+                  </li>
+                  <li>
+                    <CheckCircle2 size={20} />
+                    <span>Save and export your work</span>
+                  </li>
+                </ul>
+                <Link href="/pricing" className="btn-secondary btn-lg">
+                  View All Features <ArrowRight size={20} />
+                </Link>
+              </div>
+              <div className="pricing-visual">
+                <div className="pricing-badge">
+                  <Zap size={48} />
+                  <h3>Free Forever</h3>
+                  <p>₱0 per month</p>
+                  <span className="pricing-tag">No credit card needed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="section bg-gradient-to-b from-white to-orange-50">
+          <div className="container-narrow">
+            <div className="section-header">
+              <span className="overline">FAQ</span>
+              <h2 className="section-title">
+                Got Questions? We've Got Answers
+              </h2>
+              <p className="section-description">
+                Everything you need to know about HeyGPT
+              </p>
+            </div>
+
+            <div className="faq-accordion">
+              {faqs.map((faq, index) => (
+                <div key={index} className={`faq-item ${openFaq === index ? 'open' : ''}`}>
+                  <button
+                    className="faq-question"
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      size={20}
+                      className={`faq-icon ${openFaq === index ? 'rotate' : ''}`}
+                    />
+                  </button>
+                  {openFaq === index && (
+                    <div className="faq-answer">
+                      <p>{faq.answer}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="cta-section">
+          <div className="container">
+            <div className="cta-content">
+              <h2 className="cta-title">
+                Ready to Experience AI Made for Filipinos?
+              </h2>
+              <p className="cta-description">
+                Join thousands of happy users who are already working smarter with HeyGPT
+              </p>
+              <Link href="/signup" className="btn-primary btn-lg">
+                Start Free Chat Now <ArrowRight size={20} />
               </Link>
-              <Link
-                href="/signup"
-                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors font-medium text-sm sm:text-base"
-              >
-                Sign Up Free
-              </Link>
+              <p className="cta-note">
+                No credit card required • Free forever • Cancel anytime
+              </p>
             </div>
           </div>
-        </nav>
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-white pt-16 pb-20 sm:pt-24 sm:pb-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Free AI ChatGPT for
-              <span className="block text-emerald-600">Filipinos</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Unlock powerful AI tools completely free. Chat, generate images, translate languages,
-              check plagiarism, and more — powered by advanced AI technology.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/signup"
-                className="w-full sm:w-auto bg-emerald-600 text-white px-8 py-4 rounded-lg hover:bg-emerald-700 transition-all text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                Start Free Now
-              </Link>
-              <Link
-                href="/login"
-                className="w-full sm:w-auto border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:border-emerald-600 hover:text-emerald-600 transition-all text-lg font-semibold"
-              >
-                Try Without Sign Up
-              </Link>
-            </div>
-            <p className="mt-6 text-sm text-gray-500">
-              No credit card required • Instant access • Privacy protected
-            </p>
-          </div>
-        </div>
-
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-200 rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-200 rounded-full opacity-20 blur-3xl"></div>
-        </div>
-      </section>
-
-      {/* Key Features Bar */}
-      <section className="py-8 bg-gray-50 border-y border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="flex flex-col items-center">
-              <Zap className="w-8 h-8 text-emerald-600 mb-2" />
-              <p className="text-sm font-semibold text-gray-900">Instant Access</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <Lock className="w-8 h-8 text-emerald-600 mb-2" />
-              <p className="text-sm font-semibold text-gray-900">100% Secure</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <Star className="w-8 h-8 text-emerald-600 mb-2" />
-              <p className="text-sm font-semibold text-gray-900">Free Forever</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <Globe className="w-8 h-8 text-emerald-600 mb-2" />
-              <p className="text-sm font-semibold text-gray-900">For Filipinos</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Use Cases Section */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Powerful AI Tools at Your Fingertips
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Everything you need to work smarter, create faster, and achieve more with AI
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Detector */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-emerald-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
-                <Shield className="w-7 h-7 text-emerald-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">AI Detector</h3>
-              <p className="text-gray-600 mb-4">
-                Detect AI-generated content, verify authenticity, and ensure human-quality writing with our advanced detector.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>AI content detection</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Human eyes verification</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Authenticity scoring</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Generator */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-purple-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors">
-                <Image className="w-7 h-7 text-purple-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">AI Generator</h3>
-              <p className="text-gray-600 mb-4">
-                Create stunning visuals, voices, and art with our powerful AI generators. From images to audio.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Image & photo generator</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Art & picture creator</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Voice generation</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Perplexity AI */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-blue-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
-                <Search className="w-7 h-7 text-blue-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Perplexity AI Chat</h3>
-              <p className="text-gray-600 mb-4">
-                Advanced AI search and chat capabilities. Compare Perplexity AI vs ChatGPT and get the best of both.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Smart search & research</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Real-time information</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Source citations</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Characters AI */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-pink-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-pink-600 transition-colors">
-                <Users className="w-7 h-7 text-pink-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Character AI</h3>
-              <p className="text-gray-600 mb-4">
-                Create and chat with AI characters. Roleplay, practice conversations, or just have fun with AI companions.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-pink-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Custom AI characters</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-pink-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Roleplay scenarios</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-pink-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Interactive conversations</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Checker */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-600 transition-colors">
-                <FileText className="w-7 h-7 text-orange-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">AI Checker</h3>
-              <p className="text-gray-600 mb-4">
-                Check your content for AI generation, grammar errors, and plagiarism. Ensure originality and quality.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-orange-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Plagiarism checker</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-orange-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Grammarly AI integration</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-orange-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>AI content verification</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Translate */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-teal-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-teal-600 transition-colors">
-                <Languages className="w-7 h-7 text-teal-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">AI Translator</h3>
-              <p className="text-gray-600 mb-4">
-                Translate between Tagalog, Spanish, English, and more. Context-aware translations that sound natural.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Tagalog translation</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>100+ languages support</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Context-aware results</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Makers */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-indigo-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors">
-                <Presentation className="w-7 h-7 text-indigo-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Content Makers</h3>
-              <p className="text-gray-600 mb-4">
-                Create logos, presentations, quizzes, and infographics instantly. Professional designs in minutes.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-indigo-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Logo & PPT maker</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-indigo-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Quiz & review creator</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-indigo-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Infographic designer</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* GPT Features */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-emerald-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
-                <PenTool className="w-7 h-7 text-emerald-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">GPT Writer</h3>
-              <p className="text-gray-600 mb-4">
-                Advanced writing assistant with essay writer, content generator, and prompt optimization for all needs.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Essay & article writer</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Content humanization</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Smart prompt optimization</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Chat & More */}
-            <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="bg-cyan-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan-600 transition-colors">
-                <MessageSquare className="w-7 h-7 text-cyan-600 group-hover:text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">GPT Chat & More</h3>
-              <p className="text-gray-600 mb-4">
-                Full ChatGPT experience with AI chat, code writing, data analysis, and countless other powerful features.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-cyan-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Natural conversations</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-cyan-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Code generation & debug</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-4 h-4 text-cyan-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <span>Data analysis & insights</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/signup"
-              className="inline-flex items-center bg-emerald-600 text-white px-8 py-4 rounded-lg hover:bg-emerald-700 transition-all text-lg font-semibold shadow-lg hover:shadow-xl"
-            >
-              Try All Features Free
-              <ChevronRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-gray-600">
-              Everything you need to know about ChatGPT Philippines
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {/* FAQ Item 1 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>What happens when I sign up for ChatGPT Philippines?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                When you sign up, you'll get instant access to all our AI tools completely free. You'll create a secure account where you can save your chat history, access advanced features, and enjoy personalized AI assistance. The signup process takes less than 30 seconds, and you can start using ChatGPT, image generators, translators, and all other tools immediately.
-              </div>
-            </details>
-
-            {/* FAQ Item 2 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>What happens when I log in?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                Logging in gives you access to your personalized dashboard where you can view your chat history, saved conversations, and continue previous projects. All your data is securely stored and synced across devices. You'll also get access to your usage statistics and can manage your preferences. The platform remembers your settings and preferences for a seamless experience every time you visit.
-              </div>
-            </details>
-
-            {/* FAQ Item 3 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>How is my data stored and protected?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                We take your privacy seriously. Your data is encrypted and stored securely following industry best practices. We don't store your conversations permanently unless you choose to save them. All data processing follows our strict privacy policy, and we never sell or share your personal information with third parties. You have full control over your data and can delete your account and all associated data at any time.
-              </div>
-            </details>
-
-            {/* FAQ Item 4 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>Is ChatGPT Philippines really free? What's the catch?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                Yes, it's completely free! We believe AI should be accessible to everyone, especially Filipino users. Our free tier includes access to GPT chat, image generation, translation, plagiarism checking, and many other tools. There are reasonable daily usage limits to ensure fair access for all users. In the future, we may offer premium features for power users, but the core functionality will always remain free.
-              </div>
-            </details>
-
-            {/* FAQ Item 5 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>What's the difference between ChatGPT and Perplexity AI?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                ChatGPT excels at conversational AI, content creation, coding, and creative tasks. Perplexity AI specializes in research and information retrieval with source citations. Our platform gives you access to both capabilities, allowing you to use the best tool for your specific need. Whether you need creative writing or factual research with sources, we've got you covered.
-              </div>
-            </details>
-
-            {/* FAQ Item 6 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>What are the usage limits for free accounts?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                Free accounts get generous daily limits on all features: unlimited chat conversations, image generation, translations, and tool usage. These limits are designed to be more than enough for typical daily use. Limits reset every 24 hours. If you need more, you can always check our premium options, but most users find the free tier sufficient for their needs.
-              </div>
-            </details>
-
-            {/* FAQ Item 7 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>Can I use this for school, work, or business?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transforms" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                Absolutely! ChatGPT Philippines is perfect for students, freelancers, professionals, and businesses. Use it for essay writing, research, creating presentations, generating marketing content, code development, translation services, and much more. However, always review and verify AI-generated content before submitting important work, and follow your institution's or company's AI usage policies.
-              </div>
-            </details>
-
-            {/* FAQ Item 8 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>How accurate is the AI detector and plagiarism checker?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                Our AI detector and plagiarism checker use advanced algorithms to provide high accuracy rates. The AI detector can identify AI-generated content with good reliability, while the plagiarism checker compares your text against billions of web pages. However, no tool is 100% perfect, so we recommend using them as guides rather than absolute judgments. Always apply human judgment when evaluating results.
-              </div>
-            </details>
-
-            {/* FAQ Item 9 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>Does the translator support Tagalog and other Philippine languages?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                Yes! Our AI translator has excellent support for Tagalog and English, providing context-aware translations that sound natural. We also support Spanish, Cebuano, and 100+ other languages. The AI understands cultural context and local expressions, making translations more accurate than traditional tools. It's perfect for personal use, business communications, or learning new languages.
-              </div>
-            </details>
-
-            {/* FAQ Item 10 */}
-            <details className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <summary className="cursor-pointer p-6 font-semibold text-gray-900 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                <span>What makes ChatGPT Philippines different from other AI chat platforms?</span>
-                <ChevronRight className="w-5 h-5 text-gray-400 group-open:rotate-90 transition-transform" />
-              </summary>
-              <div className="px-6 pb-6 text-gray-600">
-                ChatGPT Philippines is specifically designed for Filipino users with features tailored to local needs. We offer all tools in one platform: chat, image generation, translation, plagiarism checking, and more. Our platform is 100% free with no hidden fees, provides excellent Tagalog support, and understands Philippine context and culture. Plus, we prioritize data privacy and don't require credit card information.
-              </div>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-r from-emerald-600 to-teal-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Experience the Power of AI?
-          </h2>
-          <p className="text-xl text-emerald-50 mb-8">
-            Join thousands of Filipinos already using ChatGPT Philippines for free
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto bg-white text-emerald-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-all text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Get Started Free
-            </Link>
-            <Link
-              href="/login"
-              className="w-full sm:w-auto border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-emerald-600 transition-all text-lg font-semibold"
-            >
-              Log In
-            </Link>
-          </div>
-          <p className="mt-6 text-sm text-emerald-50">
-            No credit card • No installation • Start in 30 seconds
-          </p>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Sparkles className="w-6 h-6 text-emerald-500" />
-                <span className="text-lg font-bold text-white">ChatGPT PH</span>
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            {/* Brand */}
+            <div className="footer-brand">
+              <div className="footer-logo">
+                <MessageCircle className="w-8 h-8" />
+                <h3 className="footer-brand-name">HeyGPT.ph</h3>
               </div>
-              <p className="text-sm text-gray-400">
-                Free AI tools for Filipinos. Chat, create, translate, and more with advanced AI technology.
+              <p className="footer-brand-tagline">
+                Your AI assistant for Philippines
               </p>
+              <div className="footer-social">
+                <a href="#" className="social-link" aria-label="Facebook">
+                  <Facebook size={20} />
+                </a>
+                <a href="#" className="social-link" aria-label="Twitter">
+                  <Twitter size={20} />
+                </a>
+                <a href="#" className="social-link" aria-label="Instagram">
+                  <Instagram size={20} />
+                </a>
+              </div>
             </div>
 
-            <div>
-              <h3 className="font-semibold text-white mb-4">Features</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">AI Chat</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Image Generator</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Translator</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">AI Detector</Link></li>
-              </ul>
-            </div>
+            {/* Links */}
+            <div className="footer-links">
+              <div className="footer-column">
+                <h4 className="footer-heading">Product</h4>
+                <ul className="footer-list">
+                  <li><Link href="/chat">AI Chat</Link></li>
+                  <li><Link href="/grammar-checker">Grammar Checker</Link></li>
+                  <li><Link href="/ai-detector">AI Detector</Link></li>
+                  <li><Link href="/pricing">Pricing</Link></li>
+                </ul>
+              </div>
 
-            <div>
-              <h3 className="font-semibold text-white mb-4">Company</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">About Us</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Terms of Service</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Contact</Link></li>
-              </ul>
-            </div>
+              <div className="footer-column">
+                <h4 className="footer-heading">Company</h4>
+                <ul className="footer-list">
+                  <li><Link href="/about">About Us</Link></li>
+                  <li><Link href="/blog">Blog</Link></li>
+                  <li><Link href="/contact">Contact</Link></li>
+                </ul>
+              </div>
 
-            <div>
-              <h3 className="font-semibold text-white mb-4">Get Started</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Sign Up Free</Link></li>
-                <li><Link href="/login" className="hover:text-emerald-500 transition-colors">Log In</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">Features</Link></li>
-                <li><Link href="/signup" className="hover:text-emerald-500 transition-colors">FAQ</Link></li>
-              </ul>
+              <div className="footer-column">
+                <h4 className="footer-heading">Legal</h4>
+                <ul className="footer-list">
+                  <li><Link href="/privacy">Privacy Policy</Link></li>
+                  <li><Link href="/terms">Terms of Service</Link></li>
+                  <li><Link href="/cookies">Cookie Policy</Link></li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>2024 ChatGPT Philippines. All rights reserved. Powered by Claude AI.</p>
-            <p className="mt-2">Made with love for Filipinos</p>
+          <div className="footer-bottom">
+            <p className="footer-copyright">
+              © 2025 HeyGPT.ph. All rights reserved.
+            </p>
+            <div className="footer-badges">
+              <span className="badge badge-success">
+                <Lock size={14} />
+                Secure
+              </span>
+              <span className="badge badge-default">Made in Philippines 🇵🇭</span>
+            </div>
           </div>
         </div>
       </footer>
-    </div>
+
+      <style jsx>{`
+        /* CSS Variables are in globals.css */
+
+        .hero-section {
+          padding: var(--space-32) 0;
+          background: linear-gradient(180deg, #FFF4ED 0%, #FFFFFF 100%);
+          overflow: hidden;
+          position: relative;
+        }
+
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          top: -200px;
+          right: -200px;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(232, 132, 74, 0.1) 0%, transparent 70%);
+          border-radius: 50%;
+        }
+
+        .hero-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: var(--space-6);
+          max-width: 900px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-2);
+          padding: 6px 16px;
+          border-radius: var(--radius-full);
+          font-size: var(--text-sm);
+          font-weight: var(--font-semibold);
+        }
+
+        .badge-primary {
+          background: var(--primary-100);
+          color: var(--primary-700);
+        }
+
+        .badge-success {
+          background: var(--success-50);
+          color: var(--success-700);
+        }
+
+        .badge-default {
+          background: var(--neutral-100);
+          color: var(--neutral-700);
+        }
+
+        .hero-title {
+          font-family: var(--font-display);
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: var(--font-bold);
+          line-height: var(--leading-tight);
+          color: var(--neutral-900);
+          margin: 0;
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, #FFB380 0%, #E8844A 50%, #D46D38 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          display: block;
+        }
+
+        .hero-description {
+          font-size: var(--text-xl);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-600);
+          margin: 0;
+          max-width: 700px;
+        }
+
+        .hero-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-4);
+          justify-content: center;
+        }
+
+        .hero-stats {
+          display: flex;
+          gap: var(--space-8);
+          margin-top: var(--space-8);
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .stat {
+          text-align: center;
+        }
+
+        .stat-value {
+          font-size: var(--text-4xl);
+          font-weight: var(--font-bold);
+          color: var(--primary-600);
+          margin: 0;
+        }
+
+        .stat-label {
+          font-size: var(--text-sm);
+          color: var(--neutral-600);
+          margin: var(--space-1) 0 0 0;
+        }
+
+        .section {
+          padding: var(--space-20) 0;
+        }
+
+        .section-header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: var(--space-4);
+          max-width: 800px;
+          margin: 0 auto var(--space-12) auto;
+        }
+
+        .overline {
+          font-size: var(--text-sm);
+          font-weight: var(--font-semibold);
+          letter-spacing: var(--tracking-wider);
+          text-transform: uppercase;
+          color: var(--primary-600);
+        }
+
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--text-4xl);
+          font-weight: var(--font-bold);
+          color: var(--neutral-900);
+          margin: 0;
+        }
+
+        .section-description {
+          font-size: var(--text-lg);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-600);
+          margin: 0;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-8);
+        }
+
+        @media (min-width: 768px) {
+          .features-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .features-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        .feature-card {
+          background: white;
+          border: 1px solid var(--neutral-200);
+          border-radius: var(--radius-xl);
+          padding: var(--space-8);
+          text-decoration: none;
+          transition: all var(--duration-medium) var(--ease-out);
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        .feature-card:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-lg);
+          border-color: var(--primary-200);
+        }
+
+        .feature-icon {
+          width: 56px;
+          height: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #FFF4ED 0%, #FFE6D5 100%);
+          border-radius: var(--radius-md);
+          color: var(--primary-600);
+        }
+
+        .feature-title {
+          font-family: var(--font-display);
+          font-size: var(--text-2xl);
+          font-weight: var(--font-semibold);
+          color: var(--neutral-800);
+          margin: 0;
+        }
+
+        .feature-description {
+          font-size: var(--text-base);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-600);
+          margin: 0;
+          flex: 1;
+        }
+
+        .feature-link-text {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-2);
+          font-size: var(--text-base);
+          font-weight: var(--font-semibold);
+          color: var(--primary-600);
+          transition: gap var(--duration-base) var(--ease-out);
+        }
+
+        .feature-card:hover .feature-link-text {
+          gap: var(--space-3);
+        }
+
+        .steps-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-8);
+        }
+
+        @media (min-width: 768px) {
+          .steps-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        .step-card {
+          text-align: center;
+          padding: var(--space-8);
+        }
+
+        .step-number {
+          width: 64px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #FFB380 0%, #E8844A 100%);
+          border-radius: var(--radius-full);
+          font-size: var(--text-3xl);
+          font-weight: var(--font-bold);
+          color: white;
+          margin: 0 auto var(--space-6);
+        }
+
+        .step-title {
+          font-family: var(--font-display);
+          font-size: var(--text-2xl);
+          font-weight: var(--font-semibold);
+          color: var(--neutral-800);
+          margin: 0 0 var(--space-3) 0;
+        }
+
+        .step-description {
+          font-size: var(--text-base);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-600);
+          margin: 0;
+        }
+
+        .testimonials-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-8);
+        }
+
+        @media (min-width: 768px) {
+          .testimonials-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        .testimonial-card {
+          background: white;
+          border: 1px solid var(--neutral-200);
+          border-radius: var(--radius-xl);
+          padding: var(--space-8);
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        .testimonial-stars {
+          display: flex;
+          gap: var(--space-1);
+          color: #F59E0B;
+        }
+
+        .testimonial-text {
+          font-size: var(--text-base);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-700);
+          margin: 0;
+          flex: 1;
+        }
+
+        .testimonial-author {
+          border-top: 1px solid var(--neutral-200);
+          padding-top: var(--space-4);
+        }
+
+        .author-name {
+          font-weight: var(--font-semibold);
+          color: var(--neutral-900);
+          margin: 0;
+        }
+
+        .author-role {
+          font-size: var(--text-sm);
+          color: var(--neutral-500);
+          margin: var(--space-1) 0 0 0;
+        }
+
+        .use-cases-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-6);
+        }
+
+        @media (min-width: 640px) {
+          .use-cases-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .use-cases-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        .use-case-card {
+          background: white;
+          border: 1px solid var(--neutral-200);
+          border-radius: var(--radius-lg);
+          padding: var(--space-6);
+          text-align: center;
+        }
+
+        .use-case-icon {
+          font-size: 48px;
+          display: block;
+          margin-bottom: var(--space-4);
+        }
+
+        .use-case-title {
+          font-weight: var(--font-semibold);
+          font-size: var(--text-lg);
+          color: var(--neutral-800);
+          margin: 0 0 var(--space-2) 0;
+        }
+
+        .use-case-description {
+          font-size: var(--text-sm);
+          color: var(--neutral-600);
+          margin: 0;
+        }
+
+        .pricing-preview {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-12);
+          align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+          .pricing-preview {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        .pricing-content {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-6);
+        }
+
+        .pricing-title {
+          font-family: var(--font-display);
+          font-size: var(--text-4xl);
+          font-weight: var(--font-bold);
+          color: var(--neutral-900);
+          margin: 0;
+        }
+
+        .pricing-description {
+          font-size: var(--text-lg);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-600);
+          margin: 0;
+        }
+
+        .pricing-features {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+          padding: 0;
+          list-style: none;
+        }
+
+        .pricing-features li {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--space-3);
+          font-size: var(--text-base);
+          color: var(--neutral-700);
+        }
+
+        .pricing-features li svg {
+          flex-shrink: 0;
+          color: var(--success-600);
+          margin-top: 2px;
+        }
+
+        .pricing-visual {
+          display: flex;
+          justify-content: center;
+        }
+
+        .pricing-badge {
+          background: linear-gradient(135deg, #FFB380 0%, #E8844A 100%);
+          border-radius: var(--radius-2xl);
+          padding: var(--space-12);
+          text-align: center;
+          color: white;
+        }
+
+        .pricing-badge svg {
+          margin-bottom: var(--space-4);
+        }
+
+        .pricing-badge h3 {
+          font-size: var(--text-3xl);
+          font-weight: var(--font-bold);
+          margin: 0 0 var(--space-2) 0;
+        }
+
+        .pricing-badge p {
+          font-size: var(--text-5xl);
+          font-weight: var(--font-bold);
+          margin: 0 0 var(--space-3) 0;
+        }
+
+        .pricing-tag {
+          display: inline-block;
+          background: rgba(255, 255, 255, 0.2);
+          padding: var(--space-2) var(--space-4);
+          border-radius: var(--radius-full);
+          font-size: var(--text-sm);
+          font-weight: var(--font-medium);
+        }
+
+        .faq-accordion {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        .faq-item {
+          border: 1px solid var(--neutral-200);
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          transition: all var(--duration-base) var(--ease-out);
+        }
+
+        .faq-item.open {
+          border-color: var(--primary-300);
+        }
+
+        .faq-question {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--space-4);
+          width: 100%;
+          padding: var(--space-5);
+          font-family: var(--font-body);
+          font-size: var(--text-lg);
+          font-weight: var(--font-semibold);
+          text-align: left;
+          color: var(--neutral-800);
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          transition: all var(--duration-base) var(--ease-out);
+        }
+
+        .faq-question:hover {
+          background: var(--neutral-50);
+        }
+
+        .faq-icon {
+          flex-shrink: 0;
+          color: var(--primary-500);
+          transition: transform var(--duration-base) var(--ease-out);
+        }
+
+        .faq-icon.rotate {
+          transform: rotate(180deg);
+        }
+
+        .faq-answer {
+          padding: 0 var(--space-5) var(--space-5) var(--space-5);
+          animation: fadeIn var(--duration-medium) var(--ease-out);
+        }
+
+        .faq-answer p {
+          font-size: var(--text-base);
+          line-height: var(--leading-relaxed);
+          color: var(--neutral-600);
+          margin: 0;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .cta-section {
+          padding: var(--space-32) 0;
+          background: linear-gradient(135deg, #FFB380 0%, #E8844A 50%, #D46D38 100%);
+        }
+
+        .cta-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: var(--space-6);
+          max-width: 700px;
+          margin: 0 auto;
+        }
+
+        .cta-title {
+          font-family: var(--font-display);
+          font-size: var(--text-4xl);
+          font-weight: var(--font-bold);
+          color: white;
+          margin: 0;
+        }
+
+        .cta-description {
+          font-size: var(--text-xl);
+          line-height: var(--leading-relaxed);
+          color: rgba(255, 255, 255, 0.9);
+          margin: 0;
+        }
+
+        .cta-note {
+          font-size: var(--text-sm);
+          color: rgba(255, 255, 255, 0.8);
+          margin: 0;
+        }
+
+        .footer {
+          background: var(--neutral-900);
+          color: var(--neutral-300);
+          padding: var(--space-16) 0 var(--space-8) 0;
+        }
+
+        .footer-content {
+          display: grid;
+          gap: var(--space-12);
+          grid-template-columns: 1fr;
+          margin-bottom: var(--space-12);
+        }
+
+        @media (min-width: 768px) {
+          .footer-content {
+            grid-template-columns: 2fr 3fr;
+          }
+        }
+
+        .footer-brand {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        .footer-logo {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          color: var(--primary-500);
+        }
+
+        .footer-brand-name {
+          font-family: var(--font-display);
+          font-size: var(--text-2xl);
+          font-weight: var(--font-bold);
+          color: white;
+          margin: 0;
+        }
+
+        .footer-brand-tagline {
+          font-size: var(--text-base);
+          color: var(--neutral-400);
+          margin: 0;
+        }
+
+        .footer-social {
+          display: flex;
+          gap: var(--space-3);
+          margin-top: var(--space-2);
+        }
+
+        .social-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background: var(--neutral-800);
+          border-radius: var(--radius-base);
+          color: var(--neutral-400);
+          text-decoration: none;
+          transition: all var(--duration-base) var(--ease-out);
+        }
+
+        .social-link:hover {
+          background: var(--primary-600);
+          color: white;
+          transform: translateY(-2px);
+        }
+
+        .footer-links {
+          display: grid;
+          gap: var(--space-8);
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .footer-column {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+        }
+
+        .footer-heading {
+          font-family: var(--font-display);
+          font-size: var(--text-base);
+          font-weight: var(--font-semibold);
+          color: white;
+          margin: 0;
+        }
+
+        .footer-list {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-3);
+          padding: 0;
+          list-style: none;
+        }
+
+        .footer-list a {
+          font-size: var(--text-sm);
+          color: var(--neutral-400);
+          text-decoration: none;
+          transition: color var(--duration-base) var(--ease-out);
+        }
+
+        .footer-list a:hover {
+          color: var(--primary-400);
+        }
+
+        .footer-bottom {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space-4);
+          align-items: center;
+          justify-content: space-between;
+          padding-top: var(--space-8);
+          border-top: 1px solid var(--neutral-800);
+        }
+
+        @media (min-width: 768px) {
+          .footer-bottom {
+            flex-direction: row;
+          }
+        }
+
+        .footer-copyright {
+          font-size: var(--text-sm);
+          color: var(--neutral-500);
+          margin: 0;
+        }
+
+        .footer-badges {
+          display: flex;
+          gap: var(--space-3);
+        }
+
+        @media (max-width: 640px) {
+          .hero-stats {
+            flex-direction: column;
+            gap: var(--space-4);
+          }
+
+          .hero-actions {
+            flex-direction: column;
+            width: 100%;
+          }
+
+          .hero-actions a {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
+    </>
   );
 }
