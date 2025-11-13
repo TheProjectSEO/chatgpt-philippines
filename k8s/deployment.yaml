@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatgpt-philippines-web
+  labels:
+    app: chatgpt-philippines
+    component: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chatgpt-philippines
+      component: web
+  template:
+    metadata:
+      labels:
+        app: chatgpt-philippines
+        component: web
+    spec:
+      containers:
+      - name: web
+        image: chatgpt-philippines:latest
+        ports:
+        - containerPort: 3000
+          name: http
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: redis-url
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: anthropic-api-key
+        - name: NEXT_PUBLIC_SUPABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: chatgpt-philippines-config
+              key: supabase-url
+        - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: supabase-anon-key
+        - name: SUPABASE_SERVICE_ROLE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: supabase-service-role-key
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatgpt-philippines-worker
+  labels:
+    app: chatgpt-philippines
+    component: worker
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: chatgpt-philippines
+      component: worker
+  template:
+    metadata:
+      labels:
+        app: chatgpt-philippines
+        component: worker
+    spec:
+      containers:
+      - name: worker
+        image: chatgpt-philippines-worker:latest
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: redis-url
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: anthropic-api-key
+        - name: NEXT_PUBLIC_SUPABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: chatgpt-philippines-config
+              key: supabase-url
+        - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: supabase-anon-key
+        - name: SUPABASE_SERVICE_ROLE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: chatgpt-philippines-secrets
+              key: supabase-service-role-key
+        - name: WORKER_CONCURRENCY
+          value: "5"
+        - name: WORKER_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
