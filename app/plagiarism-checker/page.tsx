@@ -10,6 +10,8 @@ import IntegrationCapabilities from '@/components/plagiarism/IntegrationCapabili
 import FAQSection from '@/components/plagiarism/FAQSection';
 import ConversionCTA from '@/components/plagiarism/ConversionCTA';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Free Plagiarism Checker Philippines | Thesis & Research Paper Checker | ChatGPT PH',
   description: 'Check your thesis, research papers, and academic work for plagiarism. Free AI-powered plagiarism detection tool for Filipino students, teachers, and professionals. Supports Tagalog and English.',

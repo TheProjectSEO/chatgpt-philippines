@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Free AI Humanizer - Make AI Content Human | ChatGPT Philippines',
   description: 'Transform AI-generated text into natural, human-like content. Free AI humanizer for Filipino students, writers, BPO workers. Bypass AI detection while maintaining Filipino writing style.',

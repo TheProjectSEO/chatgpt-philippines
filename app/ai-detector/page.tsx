@@ -25,6 +25,8 @@ import {
   Clock,
 } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Free AI Content Detector - Check if Text is AI-Generated | ChatGPT Philippines',
   description: 'Free AI content detector for Filipino users. Detect ChatGPT, GPT-4, Gemini & Claude text instantly. Perfect for teachers, students & content creators. Get detailed AI detection reports.',

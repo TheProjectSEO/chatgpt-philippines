@@ -22,6 +22,8 @@ import {
 } from 'lucide-react';
 import GrammarChatInterface from '@/components/GrammarChatInterface';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Free Grammar Checker Philippines - Check Grammar Online with AI',
   description: 'Free AI-powered grammar checker for Filipino users. Check grammar, spelling, punctuation instantly. Perfect for students, BPO workers, OFWs. Supports Tagalog-English.',
