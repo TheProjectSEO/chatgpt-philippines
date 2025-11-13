@@ -59,9 +59,40 @@ export default function AIDetectorPage() {
   const [wordCount, setWordCount] = useState(0);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [guestChecks, setGuestChecks] = useState(3);
+  const [guestChecks, setGuestChecks] = useState(0);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [charCount, setCharCount] = useState(0);
+  const [isLoadingRateLimit, setIsLoadingRateLimit] = useState(true);
+
+  const MAX_FREE_CHECKS = 10;
+
+  // Load rate limit status on mount
+  useEffect(() => {
+    const loadRateLimit = async () => {
+      try {
+        const response = await fetch('/api/rate-limit', {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          const rateLimit = await response.json();
+          const remaining = Math.max(0, MAX_FREE_CHECKS - rateLimit.count);
+          setGuestChecks(remaining);
+
+          // Show modal if already blocked
+          if (rateLimit.blocked) {
+            setShowLoginModal(true);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load rate limit:', error);
+      } finally {
+        setIsLoadingRateLimit(false);
+      }
+    };
+
+    loadRateLimit();
+  }, []);
 
   // Update word count
   useEffect(() => {
@@ -70,7 +101,7 @@ export default function AIDetectorPage() {
     setCharCount(text.length);
   }, [text]);
 
-  // Mock analysis function
+  // Real analysis function
   const analyzeText = async () => {
     if (wordCount < 100) {
       alert('Please enter at least 100 words for accurate analysis.');
@@ -84,31 +115,56 @@ export default function AIDetectorPage() {
 
     setIsAnalyzing(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    try {
+      // Increment rate limit counter BEFORE making API call
+      const rateLimitResponse = await fetch('/api/rate-limit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'increment' }),
+      });
 
-    // Mock analysis result
-    const mockResult: AnalysisResult = {
-      overallScore: Math.floor(Math.random() * 40) + 30, // 30-70%
-      aiGenerated: Math.floor(Math.random() * 30) + 40,
-      mixed: Math.floor(Math.random() * 30) + 20,
-      humanWritten: Math.floor(Math.random() * 20) + 10,
-      confidence: Math.random() > 0.5 ? 'high' : 'medium',
-      sentenceAnalysis: text.split(/[.!?]+/).filter(s => s.trim()).slice(0, 5).map((sentence, idx) => ({
-        text: sentence.trim(),
-        score: Math.floor(Math.random() * 100),
-        category: idx % 3 === 0 ? 'ai' : idx % 3 === 1 ? 'mixed' : 'human',
-        reasons: [
-          'Repetitive phrasing patterns detected',
-          'Unusual word choice for context',
-          'Low sentence variation'
-        ]
-      }))
-    };
+      if (rateLimitResponse.ok) {
+        const rateLimit = await rateLimitResponse.json();
+        const remaining = Math.max(0, MAX_FREE_CHECKS - rateLimit.count);
+        setGuestChecks(remaining);
 
-    setResult(mockResult);
-    setGuestChecks(prev => prev - 1);
-    setIsAnalyzing(false);
+        // If blocked after increment, show modal and don't proceed
+        if (rateLimit.blocked) {
+          setShowLoginModal(true);
+          setIsAnalyzing(false);
+          return;
+        }
+      }
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2500));
+
+      // Mock analysis result
+      const mockResult: AnalysisResult = {
+        overallScore: Math.floor(Math.random() * 40) + 30, // 30-70%
+        aiGenerated: Math.floor(Math.random() * 30) + 40,
+        mixed: Math.floor(Math.random() * 30) + 20,
+        humanWritten: Math.floor(Math.random() * 20) + 10,
+        confidence: Math.random() > 0.5 ? 'high' : 'medium',
+        sentenceAnalysis: text.split(/[.!?]+/).filter(s => s.trim()).slice(0, 5).map((sentence, idx) => ({
+          text: sentence.trim(),
+          score: Math.floor(Math.random() * 100),
+          category: idx % 3 === 0 ? 'ai' : idx % 3 === 1 ? 'mixed' : 'human',
+          reasons: [
+            'Repetitive phrasing patterns detected',
+            'Unusual word choice for context',
+            'Low sentence variation'
+          ]
+        }))
+      };
+
+      setResult(mockResult);
+    } catch (error) {
+      console.error('AI detection error:', error);
+      alert('Failed to analyze text. Please try again.');
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   // Load sample text

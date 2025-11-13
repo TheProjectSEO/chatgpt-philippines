@@ -51,54 +51,94 @@ export default function GrammarCheckerPage() {
   const [copiedText, setCopiedText] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [checkCount, setCheckCount] = useState(0);
+  const [isLoadingRateLimit, setIsLoadingRateLimit] = useState(true);
 
-  const MAX_FREE_CHECKS = 3;
+  const MAX_FREE_CHECKS = 10;
   const MAX_CHARACTERS = 5000;
 
-  // Mock grammar checking function
-  const checkGrammar = () => {
+  // Load rate limit status on mount
+  useEffect(() => {
+    const loadRateLimit = async () => {
+      try {
+        const response = await fetch('/api/rate-limit', {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          const rateLimit = await response.json();
+          setCheckCount(rateLimit.count);
+
+          // Show modal if already blocked
+          if (rateLimit.blocked) {
+            setShowLoginModal(true);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load rate limit:', error);
+      } finally {
+        setIsLoadingRateLimit(false);
+      }
+    };
+
+    loadRateLimit();
+  }, []);
+
+  // Real grammar checking function using Claude API
+  const checkGrammar = async () => {
+    // Check rate limit BEFORE processing
+    if (checkCount >= MAX_FREE_CHECKS) {
+      setShowLoginModal(true);
+      return;
+    }
+
     setIsChecking(true);
     setHasChecked(false);
+    setErrors([]);
 
-    // Simulate API delay
-    setTimeout(() => {
-      // Mock errors for demo
-      const mockErrors: GrammarError[] = [
-        {
-          id: '1',
-          type: 'grammar' as ErrorType,
-          message: 'Subject-verb agreement',
-          explanation: `The subject 'students' is plural, so it should be followed by 'were' instead of 'was'.`,
-          suggestion: 'were',
-          start: text.indexOf('was'),
-          end: text.indexOf('was') + 3,
-          originalText: 'was'
+    try {
+      // Call the grammar check API
+      const response = await fetch('/api/grammar-check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        {
-          id: '2',
-          type: 'spelling' as ErrorType,
-          message: 'Possible spelling mistake',
-          explanation: `Did you mean 'received'? This is a common spelling error.`,
-          suggestion: 'received',
-          start: text.indexOf('recieved'),
-          end: text.indexOf('recieved') + 8,
-          originalText: 'recieved'
-        }
-      ].filter(error => text.includes(error.originalText));
+        body: JSON.stringify({
+          text,
+          language
+        })
+      });
 
-      setErrors(mockErrors);
-      setIsChecking(false);
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Handle rate limit or other errors
+        if (response.status === 429) {
+          setShowLoginModal(true);
+          throw new Error(data.message || 'Rate limit exceeded');
+        }
+        throw new Error(data.error || 'Failed to check grammar');
+      }
+
+      // Set the errors from the API response
+      setErrors(data.errors || []);
       setHasChecked(true);
 
-      // Increment check count
+      // Increment check count based on the actual usage
       const newCount = checkCount + 1;
       setCheckCount(newCount);
 
-      // Show login modal after 3 checks
+      // Show login modal after MAX_FREE_CHECKS
       if (newCount >= MAX_FREE_CHECKS) {
         setTimeout(() => setShowLoginModal(true), 1500);
       }
-    }, 2000);
+    } catch (error: any) {
+      console.error('Grammar check error:', error);
+      // Show error to user
+      alert(error.message || 'Failed to check grammar. Please try again.');
+      setHasChecked(false);
+    } finally {
+      setIsChecking(false);
+    }
   };
 
   const applyCorrection = (error: GrammarError) => {

@@ -89,14 +89,44 @@ export default function TranslatorPage() {
   const [isTranslating, setIsTranslating] = useState(false);
   const [charCount, setCharCount] = useState(0);
   const [copied, setCopied] = useState(false);
-  const [guestTranslations, setGuestTranslations] = useState(10);
+  const [guestTranslations, setGuestTranslations] = useState(0);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSourceDropdown, setShowSourceDropdown] = useState(false);
   const [showTargetDropdown, setShowTargetDropdown] = useState(false);
   const [sourceSearch, setSourceSearch] = useState('');
   const [targetSearch, setTargetSearch] = useState('');
+  const [isLoadingRateLimit, setIsLoadingRateLimit] = useState(true);
 
   const maxChars = 5000;
+  const MAX_FREE_TRANSLATIONS = 10;
+
+  // Load rate limit status on mount
+  useEffect(() => {
+    const loadRateLimit = async () => {
+      try {
+        const response = await fetch('/api/rate-limit', {
+          method: 'GET',
+        });
+
+        if (response.ok) {
+          const rateLimit = await response.json();
+          const remaining = Math.max(0, MAX_FREE_TRANSLATIONS - rateLimit.count);
+          setGuestTranslations(remaining);
+
+          // Show modal if already blocked
+          if (rateLimit.blocked) {
+            setShowLoginModal(true);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load rate limit:', error);
+      } finally {
+        setIsLoadingRateLimit(false);
+      }
+    };
+
+    loadRateLimit();
+  }, []);
 
   // Update character count
   useEffect(() => {
@@ -130,21 +160,71 @@ export default function TranslatorPage() {
 
     setIsTranslating(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Increment rate limit counter BEFORE making API call
+      const rateLimitResponse = await fetch('/api/rate-limit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'increment' }),
+      });
 
-    // Mock translation (in production, this would call an actual translation API)
-    const mockTranslations: Record<string, string> = {
-      'tl-en': 'Good morning! How are you? I want to learn other languages to expand my knowledge and connect with more people around the world.',
-      'en-tl': 'Magandang umaga! Kumusta ka? Gusto kong matuto ng iba pang mga wika upang mas mapalawak ang aking kaalaman at makaconnect sa mas maraming tao sa buong mundo.',
-      'en-es': '¡Buenos días! ¿Cómo estás? Quiero aprender otros idiomas para ampliar mis conocimientos y conectar con más personas en todo el mundo.',
-      'tl-es': '¡Buenos días! ¿Cómo estás? Quiero aprender otros idiomas para ampliar mis conocimientos y conectar con más personas en todo el mundo.',
-    };
+      if (rateLimitResponse.ok) {
+        const rateLimit = await rateLimitResponse.json();
+        const remaining = Math.max(0, MAX_FREE_TRANSLATIONS - rateLimit.count);
+        setGuestTranslations(remaining);
 
-    const key = `${sourceLang}-${targetLang}`;
-    setTranslatedText(mockTranslations[key] || `[Translation of: ${sourceText}]`);
-    setGuestTranslations(prev => prev - 1);
-    setIsTranslating(false);
+        // If blocked after increment, show modal and don't proceed
+        if (rateLimit.blocked) {
+          setShowLoginModal(true);
+          setIsTranslating(false);
+          return;
+        }
+      }
+
+      // Call the translation API
+      const response = await fetch('/api/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: sourceText,
+          sourceLang: sourceLang,
+          targetLang: targetLang,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Handle rate limit
+        if (response.status === 429) {
+          setShowLoginModal(true);
+          setGuestTranslations(0);
+          alert(data.message || 'Translation limit reached. Please sign up to continue.');
+          return;
+        }
+
+        // Handle other errors
+        throw new Error(data.error || 'Translation failed');
+      }
+
+      // Set the translated text
+      setTranslatedText(data.translation);
+
+      console.log('[Translation] Success:', {
+        source: sourceLang,
+        target: targetLang,
+        inputTokens: data.usage.inputTokens,
+        outputTokens: data.usage.outputTokens,
+      });
+
+    } catch (error: any) {
+      console.error('Translation error:', error);
+      alert(error.message || 'Failed to translate. Please try again.');
+    } finally {
+      setIsTranslating(false);
+    }
   };
 
   // Swap languages
