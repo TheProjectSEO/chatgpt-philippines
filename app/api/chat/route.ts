@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { AnthropicModel } from '@/lib/types';
 import { getModelConfig, estimateCost, getModelTypeFromString } from '@/lib/modelSelection';
 import { trackModelUsage } from '@/lib/analytics';
-import { getSession } from '@auth0/nextjs-auth0';
+// import { getSession } from '@auth0/nextjs-auth0'; // TODO: Fix Auth0 session check
 
 export const dynamic = 'force-dynamic';
 
@@ -14,8 +14,9 @@ const anthropic = new Anthropic({
 export async function POST(req: NextRequest) {
   try {
     // Check if user is authenticated
-    const session = await getSession();
-    const isAuthenticated = !!session?.user;
+    // const session = await getSession();
+    // const isAuthenticated = !!session?.user;
+    const isAuthenticated = false; // TODO: Implement proper auth check
 
     // Check rate limit for non-authenticated users
     if (!isAuthenticated) {
