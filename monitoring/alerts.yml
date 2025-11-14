@@ -1,0 +1,125 @@
+groups:
+  - name: chatgpt_philippines_alerts
+    interval: 30s
+    rules:
+      # API Key Health Alerts
+      - alert: APIKeyCircuitOpen
+        expr: api_keys_circuit_open > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API key circuit breaker open"
+          description: "{{ $value }} API key(s) have circuit breaker open, indicating repeated failures"
+
+      - alert: APIKeysDegraded
+        expr: api_keys_degraded > 0
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API keys degraded"
+          description: "{{ $value }} API key(s) are experiencing errors"
+
+      - alert: APIQuotaNearLimit
+        expr: (api_requests_daily_current / api_requests_daily_max) > 0.85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "API daily quota at {{ $value | humanizePercentage }}"
+          description: "Daily API quota is above 85%, consider adding more keys or reducing usage"
+
+      - alert: APIQuotaCritical
+        expr: (api_requests_daily_current / api_requests_daily_max) > 0.95
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API daily quota at {{ $value | humanizePercentage }}"
+          description: "Daily API quota is above 95%, service degradation imminent"
+
+      # Cache Health Alerts
+      - alert: LowCacheHitRate
+        expr: cache_hit_rate < 30
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cache hit rate low at {{ $value }}%"
+          description: "Cache hit rate below 30% for 15 minutes, check cache configuration"
+
+      # Queue Health Alerts
+      - alert: QueueBacklog
+        expr: queue_pending > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Queue backlog at {{ $value }} jobs"
+          description: "Queue has over 100 pending jobs, consider scaling workers"
+
+      - alert: QueueBacklogCritical
+        expr: queue_pending > 500
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical queue backlog at {{ $value }} jobs"
+          description: "Queue has over 500 pending jobs, immediate action required"
+
+      - alert: HighJobFailureRate
+        expr: rate(queue_failed_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High job failure rate"
+          description: "Job failure rate is {{ $value }} per second over last 5 minutes"
+
+      - alert: LongQueueWaitTime
+        expr: queue_wait_time_avg_ms > 30000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Long queue wait time"
+          description: "Average queue wait time is {{ $value }}ms, users experiencing delays"
+
+      # System Resource Alerts
+      - alert: HighMemoryUsage
+        expr: (nodejs_memory_usage_bytes{type="heapUsed"} / nodejs_memory_usage_bytes{type="heapTotal"}) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage at {{ $value | humanizePercentage }}"
+          description: "Heap memory usage above 90%, potential memory leak"
+
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.job }} is down"
+          description: "{{ $labels.job }} has been down for more than 1 minute"
+
+      # Redis Alerts
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis is down"
+          description: "Redis has been unreachable for more than 1 minute"
+
+      - alert: RedisMemoryHigh
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis memory usage high"
+          description: "Redis memory usage is above 90% of maximum"

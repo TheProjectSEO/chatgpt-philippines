@@ -1,0 +1,29 @@
+# Dockerfile for worker processes
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+RUN apk add --no-cache libc6-compat
+
+# Copy package files
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Copy application code
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+# Set environment
+ENV NODE_ENV production
+
+# Create non-root user
+RUN addgroup --system --gid 1001 worker
+RUN adduser --system --uid 1001 worker
+USER worker
+
+# Run worker
+CMD ["node", "-r", "ts-node/register", "workers/chatWorker.ts"]
