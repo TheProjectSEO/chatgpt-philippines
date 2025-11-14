@@ -19,6 +19,7 @@
     "load-test:k6": "k6 run load-testing/k6-script.js"
   },
   "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.1.37",
     "@anthropic-ai/sdk": "^0.32.1",
     "@auth0/nextjs-auth0": "^4.12.1",
     "@supabase/supabase-js": "^2.45.0",
