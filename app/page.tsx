@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import Navbar from './components/Navbar';
 import {
   MessageCircle,
   CheckCircle2,
@@ -165,8 +164,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen">
         {/* Hero Section */}
         <section className="hero-section">
