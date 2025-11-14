@@ -1,11 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
+import { getCacheManager } from '@/lib/cache';
+import { getAPIKeyManager } from '@/lib/apiKeyManager';
 
 export const dynamic = 'force-dynamic';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 interface GrammarError {
   id: string;
@@ -104,6 +102,29 @@ export async function POST(req: NextRequest) {
       languageContext = 'The text may be in Filipino (Tagalog), English, or a mix (Taglish). ';
     }
 
+    // Check cache
+    const cache = await getCacheManager();
+    const cacheKey = JSON.stringify({ text, language });
+    const cached = await cache.get(cacheKey, 'claude-3-5-haiku-20241022');
+
+    if (cached) {
+      console.log('[Grammar Check] Cache hit for request');
+      return NextResponse.json({
+        errors: cached.response,
+        usage: cached.tokens
+      });
+    }
+
+    // Get API key
+    const apiKeyManager = getAPIKeyManager();
+    const keyData = apiKeyManager.getAvailableKey();
+
+    if (!keyData) {
+      return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
+    }
+
+    const anthropic = new Anthropic({ apiKey: keyData.key });
+
     const prompt = `${languageContext}Please analyze the following text for grammar, spelling, punctuation, and style errors.
 
 For each error you find, provide:
@@ -139,51 +160,67 @@ Text to check:
 ${text}
 """`;
 
-    // Call Claude API - Using Haiku for cost-effective grammar checking
-    const message = await anthropic.messages.create({
-      model: 'claude-3-5-haiku-20241022',
-      max_tokens: 4096,
-      temperature: 0.3, // Lower temperature for more consistent output
-      messages: [{
-        role: 'user',
-        content: prompt
-      }]
-    });
-
-    // Extract the text content from Claude's response
-    const responseText = message.content[0].type === 'text'
-      ? message.content[0].text
-      : '';
-
-    // Parse the JSON response
-    let errors: GrammarError[] = [];
     try {
-      // Try to extract JSON from the response
-      const jsonMatch = responseText.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        const parsedErrors = JSON.parse(jsonMatch[0]);
+      // Call Claude API - Using Haiku for cost-effective grammar checking
+      const message = await anthropic.messages.create({
+        model: 'claude-3-5-haiku-20241022',
+        max_tokens: 4096,
+        temperature: 0.3, // Lower temperature for more consistent output
+        messages: [{
+          role: 'user',
+          content: prompt
+        }]
+      });
 
-        // Add unique IDs to each error
-        errors = parsedErrors.map((error: Omit<GrammarError, 'id'>, index: number) => ({
-          ...error,
-          id: `error-${Date.now()}-${index}`
-        }));
+      // Extract the text content from Claude's response
+      const responseText = message.content[0].type === 'text'
+        ? message.content[0].text
+        : '';
+
+      // Parse the JSON response
+      let errors: GrammarError[] = [];
+      try {
+        // Try to extract JSON from the response
+        const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+        if (jsonMatch) {
+          const parsedErrors = JSON.parse(jsonMatch[0]);
+
+          // Add unique IDs to each error
+          errors = parsedErrors.map((error: Omit<GrammarError, 'id'>, index: number) => ({
+            ...error,
+            id: `error-${Date.now()}-${index}`
+          }));
+        }
+      } catch (parseError) {
+        console.error('Failed to parse Claude response:', parseError);
+        console.error('Raw response:', responseText);
+
+        // Return empty array if parsing fails
+        errors = [];
       }
-    } catch (parseError) {
-      console.error('Failed to parse Claude response:', parseError);
-      console.error('Raw response:', responseText);
 
-      // Return empty array if parsing fails
-      errors = [];
+      // Cache successful response
+      await cache.set(cacheKey, 'claude-3-5-haiku-20241022', errors, {
+        input: message.usage?.input_tokens || 0,
+        output: message.usage?.output_tokens || 0
+      });
+
+      // Report success to API key manager
+      apiKeyManager.reportSuccess(keyData.key);
+
+      return NextResponse.json({
+        errors,
+        usage: {
+          input_tokens: message.usage.input_tokens,
+          output_tokens: message.usage.output_tokens
+        }
+      });
+
+    } catch (error: any) {
+      // Report error to API key manager
+      apiKeyManager.reportError(keyData.key, error);
+      throw error;
     }
-
-    return NextResponse.json({
-      errors,
-      usage: {
-        input_tokens: message.usage.input_tokens,
-        output_tokens: message.usage.output_tokens
-      }
-    });
 
   } catch (error: any) {
     console.error('Grammar check API error:', error);

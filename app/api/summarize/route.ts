@@ -1,11 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
+import { getCacheManager } from '@/lib/cache';
+import { getAPIKeyManager } from '@/lib/apiKeyManager';
 
 export const dynamic = 'force-dynamic';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,6 +34,26 @@ export async function POST(req: NextRequest) {
 
     const instruction = lengthInstructions[length] || lengthInstructions.medium;
 
+    // Check cache
+    const cache = await getCacheManager();
+    const cacheKey = JSON.stringify({ text, length });
+    const cached = await cache.get(cacheKey, 'claude-3-5-haiku-20241022');
+
+    if (cached) {
+      console.log('[Summarize] Cache hit for request');
+      return NextResponse.json({ summary: cached.response });
+    }
+
+    // Get API key
+    const apiKeyManager = getAPIKeyManager();
+    const keyData = apiKeyManager.getAvailableKey();
+
+    if (!keyData) {
+      return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
+    }
+
+    const anthropic = new Anthropic({ apiKey: keyData.key });
+
     // Create summarization prompt
     const prompt = `${instruction}
 
@@ -44,34 +62,50 @@ ${text}
 
 Provide ONLY the summary, no preamble or additional commentary.`;
 
-    // Call Claude API for summarization using Haiku
-    const message = await anthropic.messages.create({
-      model: 'claude-3-5-haiku-20241022',
-      max_tokens: 2048,
-      temperature: 0.3,
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-    });
+    try {
+      // Call Claude API for summarization using Haiku
+      const message = await anthropic.messages.create({
+        model: 'claude-3-5-haiku-20241022',
+        max_tokens: 2048,
+        temperature: 0.3,
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+      });
 
-    // Extract summary from response
-    const summary = message.content[0].type === 'text'
-      ? message.content[0].text
-      : '';
+      // Extract summary from response
+      const summary = message.content[0].type === 'text'
+        ? message.content[0].text
+        : '';
 
-    // Log usage for monitoring
-    console.log(`[Summarizer] ${length} length | Input: ${message.usage.input_tokens} tokens | Output: ${message.usage.output_tokens} tokens`);
+      // Cache successful response
+      await cache.set(cacheKey, 'claude-3-5-haiku-20241022', summary, {
+        input: message.usage?.input_tokens || 0,
+        output: message.usage?.output_tokens || 0
+      });
 
-    return NextResponse.json({
-      summary,
-      usage: {
-        inputTokens: message.usage.input_tokens,
-        outputTokens: message.usage.output_tokens,
-      }
-    });
+      // Report success to API key manager
+      apiKeyManager.reportSuccess(keyData.key);
+
+      // Log usage for monitoring
+      console.log(`[Summarizer] ${length} length | Input: ${message.usage.input_tokens} tokens | Output: ${message.usage.output_tokens} tokens`);
+
+      return NextResponse.json({
+        summary,
+        usage: {
+          inputTokens: message.usage.input_tokens,
+          outputTokens: message.usage.output_tokens,
+        }
+      });
+
+    } catch (error: any) {
+      // Report error to API key manager
+      apiKeyManager.reportError(keyData.key, error);
+      throw error;
+    }
 
   } catch (error: any) {
     console.error('Summarizer API Error:', error);

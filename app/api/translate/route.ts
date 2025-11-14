@@ -1,11 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
+import { getCacheManager } from '@/lib/cache';
+import { getAPIKeyManager } from '@/lib/apiKeyManager';
 
 export const dynamic = 'force-dynamic';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 // Map of language codes to full language names for better translation prompts
 const languageNames: Record<string, string> = {
@@ -110,6 +108,26 @@ export async function POST(req: NextRequest) {
       // Continue anyway - don't block users if rate limiting fails
     }
 
+    // Check cache
+    const cache = await getCacheManager();
+    const cacheKey = JSON.stringify({ text, sourceLang, targetLang });
+    const cached = await cache.get(cacheKey, 'claude-3-5-haiku-20241022');
+
+    if (cached) {
+      console.log('[Translate] Cache hit for request');
+      return NextResponse.json({ translation: cached.response });
+    }
+
+    // Get API key
+    const apiKeyManager = getAPIKeyManager();
+    const keyData = apiKeyManager.getAvailableKey();
+
+    if (!keyData) {
+      return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
+    }
+
+    const anthropic = new Anthropic({ apiKey: keyData.key });
+
     // Get language names
     const sourceLanguageName = sourceLang === 'auto'
       ? 'the source language (auto-detect)'
@@ -121,35 +139,51 @@ export async function POST(req: NextRequest) {
       ? `Translate the following text to ${targetLanguageName}. Detect the source language automatically. Provide ONLY the translation, no explanations or additional text.\n\nText to translate:\n${text}`
       : `Translate the following text from ${sourceLanguageName} to ${targetLanguageName}. Provide ONLY the translation, no explanations or additional text.\n\nText to translate:\n${text}`;
 
-    // Call Claude API for translation using Haiku (fast and cheap)
-    const message = await anthropic.messages.create({
-      model: 'claude-3-5-haiku-20241022',
-      max_tokens: 2048,
-      temperature: 0.3, // Lower temperature for more consistent translations
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-    });
+    try {
+      // Call Claude API for translation using Haiku (fast and cheap)
+      const message = await anthropic.messages.create({
+        model: 'claude-3-5-haiku-20241022',
+        max_tokens: 2048,
+        temperature: 0.3, // Lower temperature for more consistent translations
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+      });
 
-    // Extract translation from response
-    const translation = message.content[0].type === 'text'
-      ? message.content[0].text
-      : '';
+      // Extract translation from response
+      const translation = message.content[0].type === 'text'
+        ? message.content[0].text
+        : '';
 
-    // Log usage for monitoring
-    console.log(`[Translation] ${sourceLanguageName} -> ${targetLanguageName} | Input: ${message.usage.input_tokens} tokens | Output: ${message.usage.output_tokens} tokens`);
+      // Cache successful response
+      await cache.set(cacheKey, 'claude-3-5-haiku-20241022', translation, {
+        input: message.usage?.input_tokens || 0,
+        output: message.usage?.output_tokens || 0
+      });
 
-    return NextResponse.json({
-      translation,
-      detectedSourceLang: sourceLang === 'auto' ? 'auto-detected' : sourceLang,
-      usage: {
-        inputTokens: message.usage.input_tokens,
-        outputTokens: message.usage.output_tokens,
-      }
-    });
+      // Report success to API key manager
+      apiKeyManager.reportSuccess(keyData.key);
+
+      // Log usage for monitoring
+      console.log(`[Translation] ${sourceLanguageName} -> ${targetLanguageName} | Input: ${message.usage.input_tokens} tokens | Output: ${message.usage.output_tokens} tokens`);
+
+      return NextResponse.json({
+        translation,
+        detectedSourceLang: sourceLang === 'auto' ? 'auto-detected' : sourceLang,
+        usage: {
+          inputTokens: message.usage.input_tokens,
+          outputTokens: message.usage.output_tokens,
+        }
+      });
+
+    } catch (error: any) {
+      // Report error to API key manager
+      apiKeyManager.reportError(keyData.key, error);
+      throw error;
+    }
 
   } catch (error: any) {
     console.error('Translation API Error:', error);

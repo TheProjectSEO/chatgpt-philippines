@@ -3,13 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { AnthropicModel } from '@/lib/types';
 import { getModelConfig, estimateCost, getModelTypeFromString } from '@/lib/modelSelection';
 import { trackModelUsage } from '@/lib/analytics';
+import { getCacheManager } from '@/lib/cache';
+import { getAPIKeyManager } from '@/lib/apiKeyManager';
 // import { getSession } from '@auth0/nextjs-auth0'; // TODO: Fix Auth0 session check
 
 export const dynamic = 'force-dynamic';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 export async function POST(req: NextRequest) {
   try {
@@ -106,6 +104,54 @@ export async function POST(req: NextRequest) {
       console.log('[Chat API] Auto-selected model:', selectedModel, 'for query:', userMessageContent.substring(0, 50));
     }
 
+    // Check cache before making API call
+    const cache = await getCacheManager();
+    const cacheKey = JSON.stringify(anthropicMessages);
+    const cached = await cache.get(cacheKey, selectedModel);
+
+    if (cached) {
+      console.log('[Cache] Returning cached response');
+      // Return cached response as a stream to maintain consistency with non-cached responses
+      const encoder = new TextEncoder();
+      const readableStream = new ReadableStream({
+        start(controller) {
+          // Stream the cached response text
+          controller.enqueue(
+            encoder.encode(`data: ${JSON.stringify({ text: cached.response })}\n\n`)
+          );
+          controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+          controller.close();
+        },
+      });
+
+      return new NextResponse(readableStream, {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      });
+    }
+
+    // Get API key from manager
+    const apiKeyManager = getAPIKeyManager();
+    const keyData = apiKeyManager.getAvailableKey();
+
+    if (!keyData) {
+      console.error('[API Key Manager] No API keys available');
+      return NextResponse.json(
+        { error: 'Service temporarily unavailable. Please try again in a moment.' },
+        { status: 503 }
+      );
+    }
+
+    console.log('[API Key Manager] Using key for request');
+
+    // Create Anthropic client with selected API key
+    const anthropic = new Anthropic({
+      apiKey: keyData.key,
+    });
+
     // Create streaming response
     const stream = await anthropic.messages.stream({
       model: selectedModel as AnthropicModel,
@@ -117,6 +163,7 @@ export async function POST(req: NextRequest) {
     // Track usage for cost monitoring
     let inputTokens = 0;
     let outputTokens = 0;
+    let fullResponseText = ''; // Accumulate response text for caching
 
     // Create a readable stream for the response
     const encoder = new TextEncoder();
@@ -127,6 +174,7 @@ export async function POST(req: NextRequest) {
             if (chunk.type === 'content_block_delta' &&
                 chunk.delta.type === 'text_delta') {
               const text = chunk.delta.text;
+              fullResponseText += text; // Accumulate for caching
               controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
             }
           }
@@ -152,11 +200,29 @@ export async function POST(req: NextRequest) {
             }).catch((error) => {
               console.error('[Analytics] Failed to track usage:', error);
             });
+
+            // Cache the successful response
+            cache.set(
+              cacheKey,
+              selectedModel,
+              fullResponseText,
+              { input: inputTokens, output: outputTokens }
+            ).catch((error) => {
+              console.error('[Cache] Failed to cache response:', error);
+            });
+
+            // Report success to API key manager
+            apiKeyManager.reportSuccess(keyData.key);
           }
 
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
-        } catch (error) {
+        } catch (error: any) {
+          console.error('[Stream Error]:', error);
+
+          // Report error to API key manager
+          apiKeyManager.reportError(keyData.key, error);
+
           controller.error(error);
         }
       },
@@ -171,6 +237,18 @@ export async function POST(req: NextRequest) {
     });
   } catch (error: any) {
     console.error('API Error:', error);
+
+    // Report error to API key manager if we have a key
+    try {
+      const apiKeyManager = getAPIKeyManager();
+      const keyData = apiKeyManager.getAvailableKey();
+      if (keyData) {
+        apiKeyManager.reportError(keyData.key, error);
+      }
+    } catch (managerError) {
+      console.error('[API Key Manager] Error reporting failure:', managerError);
+    }
+
     return NextResponse.json(
       { error: error.message || 'Internal server error' },
       { status: 500 }

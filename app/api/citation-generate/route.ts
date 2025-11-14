@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+import { getCacheManager } from '@/lib/cache';
+import { getAPIKeyManager } from '@/lib/apiKeyManager';
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,13 +21,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const message = await anthropic.messages.create({
-      model: 'claude-3-5-haiku-20241022',
-      max_tokens: 512,
-      messages: [
-        {
-          role: 'user',
-          content: `You are a citation formatting expert. Generate a properly formatted ${citationStyle} style citation for the following source:
+    // Check cache
+    const cache = await getCacheManager();
+    const cacheKey = JSON.stringify({ sourceType, citationStyle, sourceInfo });
+    const cached = await cache.get(cacheKey, 'claude-3-5-haiku-20241022');
+
+    if (cached) {
+      console.log('[Citation Generate] Cache hit for request');
+      return NextResponse.json({ citation: cached.response });
+    }
+
+    // Get API key
+    const apiKeyManager = getAPIKeyManager();
+    const keyData = apiKeyManager.getAvailableKey();
+
+    if (!keyData) {
+      return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
+    }
+
+    const anthropic = new Anthropic({ apiKey: keyData.key });
+
+    try {
+      const message = await anthropic.messages.create({
+        model: 'claude-3-5-haiku-20241022',
+        max_tokens: 512,
+        messages: [
+          {
+            role: 'user',
+            content: `You are a citation formatting expert. Generate a properly formatted ${citationStyle} style citation for the following source:
 
 Source Type: ${sourceType}
 Title: ${sourceInfo.title}
@@ -45,13 +64,29 @@ Requirements:
 - Use proper spacing and ordering
 
 Provide ONLY the formatted citation without any introductory text or explanations.`
-        }
-      ],
-    });
+          }
+        ],
+      });
 
-    const citation = message.content[0].type === 'text' ? message.content[0].text : '';
+      const citation = message.content[0].type === 'text' ? message.content[0].text : '';
 
-    return NextResponse.json({ citation });
+      // Cache successful response
+      await cache.set(cacheKey, 'claude-3-5-haiku-20241022', citation, {
+        input: message.usage?.input_tokens || 0,
+        output: message.usage?.output_tokens || 0
+      });
+
+      // Report success to API key manager
+      apiKeyManager.reportSuccess(keyData.key);
+
+      return NextResponse.json({ citation });
+
+    } catch (error: any) {
+      // Report error to API key manager
+      apiKeyManager.reportError(keyData.key, error);
+      throw error;
+    }
+
   } catch (error: any) {
     console.error('Citation generation error:', error);
     return NextResponse.json(

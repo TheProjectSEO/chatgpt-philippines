@@ -6,7 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "worker": "ts-node workers/chatWorker.ts",
+    "docker:build": "docker build -t chatgpt-philippines .",
+    "docker:build:worker": "docker build -t chatgpt-philippines-worker -f Dockerfile.worker .",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "k8s:deploy": "kubectl apply -f k8s/",
+    "k8s:delete": "kubectl delete -f k8s/",
+    "load-test:locust": "cd load-testing && locust -f locustfile.py",
+    "load-test:k6": "k6 run load-testing/k6-script.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
@@ -21,6 +31,7 @@
     "react-dom": "^18.3.0",
     "react-markdown": "^9.1.0",
     "react-syntax-highlighter": "^16.1.0",
+    "redis": "^4.6.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
@@ -32,6 +43,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.0"
   }
 }

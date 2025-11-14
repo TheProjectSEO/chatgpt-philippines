@@ -1,11 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest, NextResponse } from 'next/server';
+import { getCacheManager } from '@/lib/cache';
+import { getAPIKeyManager } from '@/lib/apiKeyManager';
 
 export const dynamic = 'force-dynamic';
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,6 +34,26 @@ export async function POST(req: NextRequest) {
 
     const instruction = modeInstructions[mode] || modeInstructions.standard;
 
+    // Check cache
+    const cache = await getCacheManager();
+    const cacheKey = JSON.stringify({ text, mode });
+    const cached = await cache.get(cacheKey, 'claude-3-5-haiku-20241022');
+
+    if (cached) {
+      console.log('[Paraphrase] Cache hit for request');
+      return NextResponse.json({ paraphrased: cached.response });
+    }
+
+    // Get API key
+    const apiKeyManager = getAPIKeyManager();
+    const keyData = apiKeyManager.getAvailableKey();
+
+    if (!keyData) {
+      return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
+    }
+
+    const anthropic = new Anthropic({ apiKey: keyData.key });
+
     // Create paraphrasing prompt
     const prompt = `${instruction}
 
@@ -44,34 +62,50 @@ ${text}
 
 Provide ONLY the paraphrased text, no explanations or additional commentary.`;
 
-    // Call Claude API for paraphrasing using Haiku
-    const message = await anthropic.messages.create({
-      model: 'claude-3-5-haiku-20241022',
-      max_tokens: 2048,
-      temperature: 0.3,
-      messages: [
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-    });
+    try {
+      // Call Claude API for paraphrasing using Haiku
+      const message = await anthropic.messages.create({
+        model: 'claude-3-5-haiku-20241022',
+        max_tokens: 2048,
+        temperature: 0.3,
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+      });
 
-    // Extract paraphrased text from response
-    const paraphrased = message.content[0].type === 'text'
-      ? message.content[0].text
-      : '';
+      // Extract paraphrased text from response
+      const paraphrased = message.content[0].type === 'text'
+        ? message.content[0].text
+        : '';
 
-    // Log usage for monitoring
-    console.log(`[Paraphraser] ${mode} mode | Input: ${message.usage.input_tokens} tokens | Output: ${message.usage.output_tokens} tokens`);
+      // Cache successful response
+      await cache.set(cacheKey, 'claude-3-5-haiku-20241022', paraphrased, {
+        input: message.usage?.input_tokens || 0,
+        output: message.usage?.output_tokens || 0
+      });
 
-    return NextResponse.json({
-      paraphrased,
-      usage: {
-        inputTokens: message.usage.input_tokens,
-        outputTokens: message.usage.output_tokens,
-      }
-    });
+      // Report success to API key manager
+      apiKeyManager.reportSuccess(keyData.key);
+
+      // Log usage for monitoring
+      console.log(`[Paraphraser] ${mode} mode | Input: ${message.usage.input_tokens} tokens | Output: ${message.usage.output_tokens} tokens`);
+
+      return NextResponse.json({
+        paraphrased,
+        usage: {
+          inputTokens: message.usage.input_tokens,
+          outputTokens: message.usage.output_tokens,
+        }
+      });
+
+    } catch (error: any) {
+      // Report error to API key manager
+      apiKeyManager.reportError(keyData.key, error);
+      throw error;
+    }
 
   } catch (error: any) {
     console.error('Paraphraser API Error:', error);
