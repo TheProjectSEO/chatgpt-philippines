@@ -97,7 +97,7 @@ export default function DataVizAgentPage() {
   };
 
   const handleSendMessage = async () => {
-    if (!input.trim() && !uploadedFile) return;
+    if (!input.trim() || !uploadedFile) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -110,21 +110,19 @@ export default function DataVizAgentPage() {
     setInput('');
     setIsLoading(true);
 
-    // Simulate AI response with streaming
-    setTimeout(() => {
-      simulateAIResponse(userMessage.content);
-    }, 500);
+    // Call the real API
+    await streamAPIResponse(userMessage.content);
   };
 
-  const simulateAIResponse = async (userInput: string) => {
+  const streamAPIResponse = async (userInput: string) => {
     const messageId = Date.now().toString();
 
-    // Create initial message with thinking
+    // Create initial message
     const aiMessage: Message = {
       id: messageId,
       role: 'assistant',
       content: '',
-      thinking: 'Analyzing your request...\n\nI can see you want to analyze the data. Let me process this step by step.',
+      thinking: '',
       thinkingComplete: false,
       tools: [],
       charts: [],
@@ -133,174 +131,125 @@ export default function DataVizAgentPage() {
 
     setMessages(prev => [...prev, aiMessage]);
 
-    // Simulate thinking completion
-    setTimeout(() => {
+    try {
+      // Create form data with file and query
+      const formData = new FormData();
+      if (uploadedFile?.file) {
+        formData.append('file', uploadedFile.file);
+      }
+      formData.append('query', userInput);
+
+      // Call the real API endpoint
+      const response = await fetch('/api/data-viz', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.statusText}`);
+      }
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        throw new Error('No response body');
+      }
+
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (!line.trim() || !line.startsWith('data: ')) continue;
+
+          const data = line.slice(6);
+          if (data === '[DONE]') continue;
+
+          try {
+            const parsed = JSON.parse(data);
+
+            setMessages(prev => prev.map(msg => {
+              if (msg.id !== messageId) return msg;
+
+              const updated = { ...msg };
+
+              // Handle thinking blocks
+              if (parsed.type === 'thinking') {
+                updated.thinking = (updated.thinking || '') + parsed.content;
+              } else if (parsed.type === 'thinking_complete') {
+                updated.thinkingComplete = true;
+              }
+              // Handle tool use
+              else if (parsed.type === 'tool_use') {
+                const existingTool = updated.tools?.find(t => t.id === parsed.toolUseId);
+                if (existingTool) {
+                  existingTool.status = 'running';
+                } else {
+                  updated.tools = [
+                    ...(updated.tools || []),
+                    {
+                      id: parsed.toolUseId,
+                      name: parsed.name,
+                      status: 'running',
+                      progress: 0,
+                    }
+                  ];
+                }
+              }
+              // Handle tool result
+              else if (parsed.type === 'tool_result') {
+                updated.tools = updated.tools?.map(t =>
+                  t.id === parsed.toolUseId
+                    ? { ...t, status: 'complete', progress: 100, result: parsed.result }
+                    : t
+                );
+              }
+              // Handle text content
+              else if (parsed.type === 'text') {
+                updated.content += parsed.content;
+              }
+              // Handle chart data
+              else if (parsed.type === 'chart') {
+                updated.charts = [
+                  ...(updated.charts || []),
+                  {
+                    id: parsed.chartId || Date.now().toString(),
+                    type: parsed.chartType,
+                    title: parsed.title,
+                    data: parsed.data
+                  }
+                ];
+              }
+
+              return updated;
+            }));
+          } catch (e) {
+            console.error('Failed to parse SSE data:', e);
+          }
+        }
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error('API Error:', error);
       setMessages(prev => prev.map(msg =>
         msg.id === messageId
           ? {
               ...msg,
-              thinking: 'Analyzing your request...\n\nI can see you want to analyze the data. Let me process this step by step.\n\nFirst, I\'ll load and validate the data structure.\nThen I\'ll perform statistical analysis.\nFinally, I\'ll suggest the best visualizations based on the data patterns.',
+              content: 'Sorry, there was an error processing your request. Please try again.',
               thinkingComplete: true
             }
           : msg
       ));
-
-      // Start tool execution
-      simulateToolExecution(messageId);
-    }, 2000);
-  };
-
-  const simulateToolExecution = async (messageId: string) => {
-    // Tool 1: Analyze Data
-    const tool1: ToolExecution = {
-      id: '1',
-      name: 'analyzeData',
-      status: 'running',
-      progress: 0
-    };
-
-    setMessages(prev => prev.map(msg =>
-      msg.id === messageId ? { ...msg, tools: [tool1] } : msg
-    ));
-
-    // Simulate progress
-    for (let progress = 0; progress <= 100; progress += 20) {
-      await new Promise(resolve => setTimeout(resolve, 300));
-      setMessages(prev => prev.map(msg =>
-        msg.id === messageId
-          ? {
-              ...msg,
-              tools: msg.tools?.map(t =>
-                t.id === '1' ? { ...t, progress } : t
-              )
-            }
-          : msg
-      ));
+      setIsLoading(false);
     }
-
-    // Complete tool 1
-    setMessages(prev => prev.map(msg =>
-      msg.id === messageId
-        ? {
-            ...msg,
-            tools: msg.tools?.map(t =>
-              t.id === '1'
-                ? {
-                    ...t,
-                    status: 'complete',
-                    result: {
-                      mean: 45000,
-                      median: 42000,
-                      mode: 38000,
-                      stdDev: 12500,
-                      min: 15000,
-                      max: 98000
-                    }
-                  }
-                : t
-            )
-          }
-        : msg
-    ));
-
-    // Tool 2: Suggest Visualizations
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    const tool2: ToolExecution = {
-      id: '2',
-      name: 'suggestVisualizations',
-      status: 'running',
-      progress: 0
-    };
-
-    setMessages(prev => prev.map(msg =>
-      msg.id === messageId ? { ...msg, tools: [...(msg.tools || []), tool2] } : msg
-    ));
-
-    for (let progress = 0; progress <= 100; progress += 25) {
-      await new Promise(resolve => setTimeout(resolve, 250));
-      setMessages(prev => prev.map(msg =>
-        msg.id === messageId
-          ? {
-              ...msg,
-              tools: msg.tools?.map(t =>
-                t.id === '2' ? { ...t, progress } : t
-              )
-            }
-          : msg
-      ));
-    }
-
-    setMessages(prev => prev.map(msg =>
-      msg.id === messageId
-        ? {
-            ...msg,
-            tools: msg.tools?.map(t =>
-              t.id === '2'
-                ? {
-                    ...t,
-                    status: 'complete',
-                    result: 'Recommended: Bar chart for category comparison, Line chart for time series trends'
-                  }
-                : t
-            )
-          }
-        : msg
-    ));
-
-    // Add response and chart
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    const sampleChartData = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [
-        {
-          label: 'Sales ($)',
-          data: [35000, 38000, 42000, 45000, 48000, 52000, 48000, 55000, 58000, 62000, 68000, 78000],
-          backgroundColor: 'rgba(59, 130, 246, 0.8)',
-          borderColor: 'rgba(59, 130, 246, 1)',
-          borderWidth: 2
-        }
-      ]
-    };
-
-    const chart: ChartData = {
-      id: '1',
-      type: 'bar',
-      title: 'Monthly Sales Trend - 2023',
-      data: sampleChartData
-    };
-
-    setMessages(prev => prev.map(msg =>
-      msg.id === messageId
-        ? {
-            ...msg,
-            content: `I've analyzed your sales data. Here are the key insights:
-
-📊 **Sales Statistics:**
-- Average monthly sales: $45,000
-- Median sales: $42,000
-- Peak month: December ($78,000)
-- Lowest month: January ($35,000)
-- Standard deviation: $12,500
-
-📈 **Trends Identified:**
-- Strong upward trend throughout the year (+23% YoY)
-- Seasonal peak in Q4 (holiday season)
-- Consistent growth from Q2 onwards
-- No significant outliers detected
-
-💡 **Recommendations:**
-1. Plan inventory for Q4 holiday rush
-2. Investigate Q1 slowdown causes
-3. Leverage Q2-Q3 momentum with targeted campaigns
-4. Consider expanding successful product lines from peak months`,
-            charts: [chart]
-          }
-        : msg
-    ));
-
-    setIsLoading(false);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
