@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 interface ThinkingBlockProps {
   content: string;
@@ -10,41 +10,22 @@ interface ThinkingBlockProps {
 }
 
 export default function ThinkingBlock({ content, isComplete = false }: ThinkingBlockProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mb-4 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 dark:border-blue-800 overflow-hidden"
-    >
+    <div className="mb-2">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center justify-between p-4 text-left hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-colors"
+        className="flex items-center gap-2 text-xs text-[#666666] hover:text-[#B4B4B4] transition-colors py-1"
       >
-        <div className="flex items-center gap-3">
-          <motion.div
-            animate={!isComplete ? {
-              scale: [1, 1.2, 1],
-              rotate: [0, 5, -5, 0]
-            } : {}}
-            transition={{
-              duration: 2,
-              repeat: !isComplete ? Infinity : 0,
-              ease: "easeInOut"
-            }}
-          >
-            <Brain className={`w-5 h-5 ${!isComplete ? 'text-blue-600 dark:text-blue-400' : 'text-blue-500 dark:text-blue-500'}`} />
-          </motion.div>
-          <span className="font-medium text-blue-900 dark:text-blue-100">
-            {isComplete ? 'Extended Thinking' : 'Thinking...'}
-          </span>
-        </div>
         {isExpanded ? (
-          <ChevronUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+          <ChevronDown className="w-3 h-3" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+          <ChevronRight className="w-3 h-3" />
         )}
+        <span className="font-medium">
+          {isComplete ? 'Extended Thinking' : 'Thinking...'}
+        </span>
       </button>
 
       <AnimatePresence>
@@ -53,11 +34,11 @@ export default function ThinkingBlock({ content, isComplete = false }: ThinkingB
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             className="overflow-hidden"
           >
-            <div className="px-4 pb-4 pt-2">
-              <div className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed whitespace-pre-wrap font-mono">
+            <div className="mt-1 pl-5 pr-2 py-2 bg-[#1A1A1A] rounded border border-[#2A2A2A]">
+              <div className="text-xs text-[#B4B4B4] leading-relaxed whitespace-pre-wrap">
                 {content ? (
                   <TypewriterText text={content} isComplete={isComplete} />
                 ) : (
@@ -73,7 +54,7 @@ export default function ThinkingBlock({ content, isComplete = false }: ThinkingB
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 

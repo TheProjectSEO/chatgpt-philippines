@@ -311,7 +311,7 @@ export default function DataVizAgentPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-gray-950 dark:via-blue-950 dark:to-cyan-950">
+    <div className="flex h-screen bg-[#0D0D0D]">
       {/* Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
@@ -320,49 +320,49 @@ export default function DataVizAgentPage() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -320, opacity: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="w-80 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-xl"
+            className="w-80 bg-[#151515] border-r border-[#2A2A2A] flex flex-col"
           >
-            <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+            <div className="p-6 border-b border-[#2A2A2A]">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl">
-                    <BarChart3 className="w-6 h-6 text-white" />
+                  <div className="p-2 bg-[#2A2A2A] rounded-lg">
+                    <BarChart3 className="w-5 h-5 text-[#B4B4B4]" />
                   </div>
                   <div>
-                    <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                    <h1 className="text-base font-medium text-[#E8E8E8]">
                       Data Viz Agent
                     </h1>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-[#666666]">
                       Powered by Claude
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => setIsSidebarOpen(false)}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors lg:hidden"
+                  className="p-2 hover:bg-[#2A2A2A] rounded-lg transition-colors lg:hidden"
                 >
-                  <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <X className="w-4 h-4 text-[#B4B4B4]" />
                 </button>
               </div>
 
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <Sparkles className="w-4 h-4 text-yellow-500" />
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-sm text-[#B4B4B4]">
+                  <Sparkles className="w-3.5 h-3.5" />
                   <span>AI-powered insights</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <TrendingUp className="w-4 h-4 text-green-500" />
+                <div className="flex items-center gap-2 text-sm text-[#B4B4B4]">
+                  <TrendingUp className="w-3.5 h-3.5" />
                   <span>Interactive visualizations</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <MessageCircle className="w-4 h-4 text-blue-500" />
+                <div className="flex items-center gap-2 text-sm text-[#B4B4B4]">
+                  <MessageCircle className="w-3.5 h-3.5" />
                   <span>Natural language queries</span>
                 </div>
               </div>
             </div>
 
             <div className="flex-1 overflow-y-auto p-6">
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-xs font-medium text-[#B4B4B4] mb-3 uppercase tracking-wide">
                 Upload Data
               </h2>
               <FileUploadZone
@@ -373,10 +373,10 @@ export default function DataVizAgentPage() {
 
               {uploadedFile && (
                 <div className="mt-6">
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xs font-medium text-[#B4B4B4] mb-2 uppercase tracking-wide">
                     Quick Actions
                   </h3>
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     {[
                       'Show summary statistics',
                       'Visualize trends over time',
@@ -387,7 +387,7 @@ export default function DataVizAgentPage() {
                       <button
                         key={idx}
                         onClick={() => setInput(action)}
-                        className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                        className="w-full text-left px-3 py-2 text-sm text-[#E8E8E8] hover:bg-[#2A2A2A] rounded transition-colors"
                       >
                         {action}
                       </button>
@@ -397,8 +397,8 @@ export default function DataVizAgentPage() {
               )}
             </div>
 
-            <div className="p-4 border-t border-gray-200 dark:border-gray-800">
-              <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+            <div className="p-4 border-t border-[#2A2A2A]">
+              <p className="text-xs text-[#666666] text-center">
                 Upload CSV, JSON, or Excel files to get started
               </p>
             </div>
@@ -409,18 +409,18 @@ export default function DataVizAgentPage() {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 shadow-sm">
+        <header className="bg-[#151515] border-b border-[#2A2A2A] px-6 py-3.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {!isSidebarOpen && (
                 <button
                   onClick={() => setIsSidebarOpen(true)}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                  className="p-2 hover:bg-[#2A2A2A] rounded transition-colors"
                 >
-                  <Menu className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <Menu className="w-4 h-4 text-[#B4B4B4]" />
                 </button>
               )}
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <h2 className="text-sm font-medium text-[#E8E8E8]">
                 Chat with Your Data
               </h2>
             </div>
@@ -431,7 +431,7 @@ export default function DataVizAgentPage() {
         <div
           ref={chatContainerRef}
           id="chat-container"
-          className="flex-1 overflow-y-auto px-6 py-8 space-y-6"
+          className="flex-1 overflow-y-auto px-6 py-6 bg-[#0D0D0D]"
         >
           {messages.length === 0 ? (
             <motion.div
@@ -439,16 +439,16 @@ export default function DataVizAgentPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center h-full text-center"
             >
-              <div className="p-4 bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-2xl mb-6">
-                <BarChart3 className="w-16 h-16 text-blue-600 dark:text-blue-400" />
+              <div className="p-4 bg-[#1A1A1A] rounded-lg mb-6">
+                <BarChart3 className="w-12 h-12 text-[#B4B4B4]" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+              <h3 className="text-xl font-medium text-[#E8E8E8] mb-3">
                 Welcome to Data Viz Agent
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
+              <p className="text-[#B4B4B4] max-w-md mb-8 text-sm">
                 Upload your data and ask questions in natural language. I'll analyze it and create beautiful visualizations for you.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-w-2xl">
                 {[
                   'What are the trends in my sales data?',
                   'Show me a comparison by region',
@@ -458,7 +458,7 @@ export default function DataVizAgentPage() {
                   <button
                     key={idx}
                     onClick={() => setInput(example)}
-                    className="px-4 py-3 text-left text-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-md transition-all"
+                    className="px-4 py-2.5 text-left text-sm bg-[#1A1A1A] border border-[#2A2A2A] text-[#E8E8E8] rounded hover:bg-[#252525] transition-colors"
                   >
                     {example}
                   </button>
@@ -466,26 +466,31 @@ export default function DataVizAgentPage() {
               </div>
             </motion.div>
           ) : (
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="max-w-3xl mx-auto space-y-4">
               {messages.map((message) => (
                 <div key={message.id}>
                   {message.role === 'user' ? (
                     <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="flex justify-end"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex justify-end mb-4"
                     >
-                      <div className="max-w-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl rounded-tr-sm px-6 py-3 shadow-lg">
+                      <div className="max-w-2xl bg-[#2A2A2A] text-[#E8E8E8] rounded-lg px-4 py-3">
                         <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                       </div>
                     </motion.div>
                   ) : (
                     <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="flex justify-start"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex gap-3 mb-4"
                     >
-                      <div className="max-w-3xl w-full">
+                      {/* AI Avatar */}
+                      <div className="flex-shrink-0 w-7 h-7 rounded bg-[#CC785C] flex items-center justify-center text-white text-xs font-medium mt-1">
+                        AI
+                      </div>
+
+                      <div className="flex-1 max-w-3xl space-y-3">
                         {message.thinking && (
                           <ThinkingBlock
                             content={message.thinking}
@@ -505,11 +510,9 @@ export default function DataVizAgentPage() {
                         ))}
 
                         {message.content && (
-                          <div className="bg-white dark:bg-gray-800 rounded-2xl rounded-tl-sm px-6 py-4 shadow-lg border border-gray-200 dark:border-gray-700 mb-4">
-                            <div className="prose prose-sm dark:prose-invert max-w-none">
-                              <div className="text-sm text-gray-900 dark:text-gray-100 leading-relaxed whitespace-pre-wrap">
-                                {message.content}
-                              </div>
+                          <div className="bg-transparent">
+                            <div className="text-sm text-[#E8E8E8] leading-relaxed whitespace-pre-wrap">
+                              {message.content}
                             </div>
                           </div>
                         )}
@@ -541,9 +544,9 @@ export default function DataVizAgentPage() {
         </div>
 
         {/* Input Area */}
-        <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-6 py-4 shadow-lg">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-end gap-3">
+        <div className="bg-[#151515] border-t border-[#2A2A2A] px-6 py-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-end gap-2">
               <div className="flex-1 relative">
                 <textarea
                   value={input}
@@ -552,21 +555,21 @@ export default function DataVizAgentPage() {
                   placeholder={uploadedFile ? "Ask me anything about your data..." : "Upload a file to get started..."}
                   disabled={!uploadedFile}
                   rows={1}
-                  className="w-full px-4 py-3 pr-12 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                  style={{ minHeight: '48px', maxHeight: '120px' }}
+                  className="w-full px-4 py-3 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg resize-none focus:outline-none focus:border-[#CC785C] disabled:opacity-50 disabled:cursor-not-allowed text-[#E8E8E8] placeholder-[#666666] text-sm"
+                  style={{ minHeight: '44px', maxHeight: '120px' }}
                 />
               </div>
 
               <button
                 onClick={handleSendMessage}
                 disabled={(!input.trim() && !uploadedFile) || isLoading}
-                className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl disabled:hover:shadow-lg"
+                className="p-3 bg-[#CC785C] hover:bg-[#D68966] text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4" />
               </button>
             </div>
 
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+            <p className="text-xs text-[#666666] mt-2 text-center">
               Press Enter to send, Shift+Enter for new line
             </p>
           </div>
