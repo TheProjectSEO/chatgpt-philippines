@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 import Providers from '../components/Providers';
 import Navbar from '../components/Navbar';
 import RegisterServiceWorker from './register-sw';
+import PWAInstallPrompt from '../components/PWAInstallPrompt';
 import { WebVitals } from './web-vitals';
 import { inter, plusJakartaSans } from './fonts';
+import SchemaMarkup from '../components/seo/SchemaMarkup';
+import { generateOrganizationSchema, generateWebPageSchema } from '@/lib/seo';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -84,6 +87,26 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Generate site-wide organization schema
+  const organizationSchema = generateOrganizationSchema({
+    name: 'ChatGPT Philippines',
+    url: 'https://chatgpt-philippines.com',
+    logo: 'https://chatgpt-philippines.com/logo.png',
+    description: 'Free AI-powered tools for Filipinos: chat, translate, check grammar, detect AI, and more.',
+    socialProfiles: [
+      'https://facebook.com/chatgptph',
+      'https://twitter.com/chatgptph',
+    ],
+  });
+
+  const websiteSchema = generateWebPageSchema({
+    name: 'ChatGPT Philippines',
+    description: 'Free AI-powered tools for Filipinos including chat, image generation, translation, plagiarism checker, and more.',
+    url: 'https://chatgpt-philippines.com',
+    siteName: 'ChatGPT Philippines',
+    siteUrl: 'https://chatgpt-philippines.com',
+  });
+
   return (
     <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
       <head>
@@ -97,10 +120,15 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#E8844A" />
         <meta name="msapplication-tap-highlight" content="no" />
+
+        {/* Structured Data - Organization & WebSite Schema */}
+        <SchemaMarkup schema={organizationSchema} id="organization-schema" />
+        <SchemaMarkup schema={websiteSchema} id="website-schema" />
       </head>
       <body className={inter.className}>
         <WebVitals />
         <RegisterServiceWorker />
+        <PWAInstallPrompt />
         <Navbar />
         <Providers>{children}</Providers>
       </body>
