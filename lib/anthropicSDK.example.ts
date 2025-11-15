@@ -12,9 +12,9 @@ import {
   AnthropicSDK,
   createSDKMessage,
   createTool,
-  type Tool,
   type SDKResponse,
 } from './anthropicSDK';
+import type { Tool } from './anthropicSDK.types';
 
 // ============================================================================
 // Example 1: Basic Message with Extended Thinking
@@ -290,7 +290,7 @@ async function mcpToolIntegrationExample() {
     name: 'web_search',
     description: 'Search the web for information',
     inputSchema: {
-      type: 'object',
+      type: 'object' as const,
       properties: {
         query: {
           type: 'string',
@@ -303,13 +303,17 @@ async function mcpToolIntegrationExample() {
       },
       required: ['query'],
     },
-  };
+  } as const;
 
   // Convert MCP tool to SDK tool
   const webSearchTool: Tool = {
     name: mcpWebSearchTool.name,
     description: mcpWebSearchTool.description,
-    input_schema: mcpWebSearchTool.inputSchema,
+    input_schema: {
+      type: 'object' as const,
+      properties: mcpWebSearchTool.inputSchema.properties,
+      required: [...mcpWebSearchTool.inputSchema.required],
+    },
     execute: async (input: { query: string; limit?: number }) => {
       // Mock web search
       return {

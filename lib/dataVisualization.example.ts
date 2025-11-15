@@ -43,8 +43,8 @@ import {
 
   // Types
   type DataTable,
-  type ChartData,
-  type ChatMessage,
+  type DVChartData,
+  type DVChatMessage,
 } from './dataVisualization';
 
 // ============================================================================
@@ -213,7 +213,7 @@ export async function example5_ExportChatToPDF() {
   console.log('=== Example 5: Export Chat Conversation to PDF ===\n');
 
   // Sample chat messages
-  const messages: ChatMessage[] = [
+  const messages: DVChatMessage[] = [
     {
       role: 'user',
       content: 'Can you analyze this sales data and create a visualization?',
@@ -237,7 +237,7 @@ export async function example5_ExportChatToPDF() {
   ];
 
   // Sample charts (in real usage, these would be actual chart canvases)
-  const charts: ChartData[] = [
+  const charts: DVChartData[] = [
     {
       type: 'bar',
       title: 'Quarterly Sales Performance',
@@ -337,14 +337,14 @@ export async function example6_ExportTableToPDF() {
 export async function example7_ExportToPowerPoint() {
   console.log('=== Example 7: Export to PowerPoint Presentation ===\n');
 
-  const messages: ChatMessage[] = [
+  const messages: DVChatMessage[] = [
     {
       role: 'assistant',
       content: 'Analysis reveals strong performance across all metrics with Q3 leading growth.',
     },
   ];
 
-  const charts: ChartData[] = [
+  const charts: DVChartData[] = [
     {
       type: 'line',
       title: 'Revenue Trend Analysis',

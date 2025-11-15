@@ -1,18 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
-
-/**
- * Tool definition interface for SDK
- */
-export interface Tool {
-  name: string;
-  description: string;
-  input_schema: {
-    type: 'object';
-    properties: Record<string, any>;
-    required?: string[];
-  };
-  execute: (input: any) => Promise<any>;
-}
+import type { Tool } from './anthropicSDK.types';
 
 /**
  * SDK configuration options
@@ -226,7 +213,7 @@ export class AnthropicSDK {
           type: 'text',
           text: systemPrompt,
           cache_control: { type: 'ephemeral' },
-        },
+        } as any,
       ];
     }
 
@@ -240,7 +227,7 @@ export class AnthropicSDK {
     return tools.map(tool => ({
       name: tool.name,
       description: tool.description,
-      input_schema: tool.input_schema,
+      input_schema: tool.input_schema as any,
     }));
   }
 
@@ -255,9 +242,10 @@ export class AnthropicSDK {
    * Extract thinking content from response
    */
   private extractThinking(response: Anthropic.Message): string | undefined {
+    // @ts-ignore - Extended thinking may not be in current SDK types
     const thinkingBlocks = response.content.filter(
-      (block): block is ThinkingBlock => block.type === 'thinking'
-    );
+      (block: any): boolean => block.type === 'thinking'
+    ) as unknown as ThinkingBlock[];
 
     if (thinkingBlocks.length === 0) return undefined;
 

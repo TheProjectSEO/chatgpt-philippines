@@ -39,7 +39,7 @@ async function example1_basicToolUsage() {
       },
     ],
     {
-      tools: [webSearchTool],
+      tools: [webSearchTool] as any,
       model: 'claude-sonnet-4-20250514',
       maxTokens: 2048,
     }
@@ -67,7 +67,7 @@ async function example2_builtInCollections() {
       },
     ],
     {
-      tools: builtInTools.webResearch,
+      tools: builtInTools.webResearch as any,
       model: 'claude-sonnet-4-20250514',
     }
   );
@@ -215,7 +215,7 @@ async function example8_databaseQuery() {
       },
     ],
     {
-      tools: builtInTools.database,
+      tools: builtInTools.database as any,
       model: 'claude-sonnet-4-20250514',
     }
   );
@@ -287,7 +287,7 @@ When analyzing SEO, consider:
     {
       systemPrompt,
       systemPromptCaching: true,
-      tools: builtInTools.seo,
+      tools: builtInTools.seo as any,
       model: 'claude-sonnet-4-20250514',
     }
   );
@@ -306,7 +306,7 @@ When analyzing SEO, consider:
     {
       systemPrompt,
       systemPromptCaching: true,
-      tools: builtInTools.seo,
+      tools: builtInTools.seo as any,
       model: 'claude-sonnet-4-20250514',
     }
   );

@@ -13,7 +13,7 @@
  * - Type-safe tool definitions with comprehensive MCP server support
  */
 
-import { Tool } from './anthropicSDK';
+import type { Tool } from './anthropicSDK.types';
 
 // ============================================================================
 // Types and Interfaces
@@ -498,8 +498,8 @@ export function getMCPTools(options?: {
  * Get a specific MCP tool by name
  */
 export function getMCPTool(toolName: string): MCPTool | null {
-  const tools = getMCPTools();
-  return tools.find(t => t.name === toolName) || null;
+  const tools = getMCPTools() as any;
+  return tools.find((t: any) => t.name === toolName) || null;
 }
 
 /**
@@ -533,13 +533,13 @@ export function getMCPServerStats(): {
   toolsByCategory: Record<string, number>;
   toolsByServer: Record<string, number>;
 } {
-  const tools = getMCPTools();
+  const tools = getMCPTools() as any;
   const enabledServers = MCP_SERVERS.filter(s => s.enabled);
 
   const toolsByCategory: Record<string, number> = {};
   const toolsByServer: Record<string, number> = {};
 
-  tools.forEach(tool => {
+  tools.forEach((tool: any) => {
     const category = tool.category || 'other';
     const server = tool.mcpServer;
 
@@ -574,7 +574,7 @@ export const builtInTools = {
   /**
    * All MCP tools
    */
-  all: getMCPTools(),
+  all: getMCPTools() as any,
 
   /**
    * Web research tools (search + crawl)

@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Get database tools for potential data queries
-    const tools = getMCPTools({ categories: ['database'] });
+    const tools = getMCPTools({ categories: ['database'] }) as any;
 
     console.log('[Data Processor] Processing data:', format, '| Length:', data.length);
 

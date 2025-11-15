@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Get MCP tools for research
-    const tools = getMCPTools();
+    const tools = getMCPTools() as any;
 
     console.log('[Research Assistant] Processing query:', query.substring(0, 100));
 

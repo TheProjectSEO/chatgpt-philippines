@@ -189,7 +189,9 @@ export class CacheManager {
         if (this.memoryCache.size >= this.MAX_MEMORY_CACHE_SIZE) {
           // Remove oldest entry (FIFO)
           const firstKey = this.memoryCache.keys().next().value;
-          this.memoryCache.delete(firstKey);
+          if (firstKey) {
+            this.memoryCache.delete(firstKey);
+          }
         }
         this.memoryCache.set(key, entry);
         console.log('[Cache] SET - Memory', {
