@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "sdk:test": "npx ts-node lib/anthropicSDK.test.ts",
+    "sdk:example:basic": "npx ts-node -e \"require('./lib/anthropicSDK.example').basicThinkingExample()\"",
+    "sdk:example:calculator": "npx ts-node -e \"require('./lib/anthropicSDK.example').calculatorToolExample()\"",
+    "sdk:example:multiple-tools": "npx ts-node -e \"require('./lib/anthropicSDK.example').multipleToolsExample()\"",
+    "sdk:example:caching": "npx ts-node -e \"require('./lib/anthropicSDK.example').promptCachingExample()\"",
+    "sdk:example:thinking-tools": "npx ts-node -e \"require('./lib/anthropicSDK.example').thinkingWithToolsExample()\"",
+    "sdk:example:all": "npx ts-node lib/anthropicSDK.example.ts"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.36.1",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "ts-node": "^10.9.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.1"
+  }
+}
