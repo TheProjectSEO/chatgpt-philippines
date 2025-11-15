@@ -17,7 +17,6 @@ export async function GET() {
     try {
       const apiKeyManager = getAPIKeyManager();
       const health = apiKeyManager.getHealthStatus();
-      const capacity = apiKeyManager.getTotalCapacity();
       const alerts = apiKeyManager.getUsageAlerts();
 
       metrics.push('# HELP api_keys_total Total number of API keys');
@@ -28,29 +27,10 @@ export async function GET() {
       metrics.push('# TYPE api_keys_healthy gauge');
       metrics.push(`api_keys_healthy ${health.healthy}`);
 
-      metrics.push('# HELP api_keys_degraded Number of degraded API keys');
-      metrics.push('# TYPE api_keys_degraded gauge');
-      metrics.push(`api_keys_degraded ${health.degraded}`);
 
       metrics.push('# HELP api_keys_circuit_open Number of API keys with circuit open');
       metrics.push('# TYPE api_keys_circuit_open gauge');
       metrics.push(`api_keys_circuit_open ${health.circuitOpen}`);
-
-      metrics.push('# HELP api_requests_per_minute_current Current requests per minute');
-      metrics.push('# TYPE api_requests_per_minute_current gauge');
-      metrics.push(`api_requests_per_minute_current ${capacity.currentRPM}`);
-
-      metrics.push('# HELP api_requests_per_minute_max Maximum requests per minute');
-      metrics.push('# TYPE api_requests_per_minute_max gauge');
-      metrics.push(`api_requests_per_minute_max ${capacity.maxRPM}`);
-
-      metrics.push('# HELP api_requests_daily_current Current daily requests');
-      metrics.push('# TYPE api_requests_daily_current gauge');
-      metrics.push(`api_requests_daily_current ${capacity.currentDaily}`);
-
-      metrics.push('# HELP api_requests_daily_max Maximum daily requests');
-      metrics.push('# TYPE api_requests_daily_max gauge');
-      metrics.push(`api_requests_daily_max ${capacity.maxDaily}`);
 
       metrics.push('# HELP api_alerts_total Total number of API alerts');
       metrics.push('# TYPE api_alerts_total gauge');

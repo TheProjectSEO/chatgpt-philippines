@@ -43,14 +43,13 @@ export async function GET() {
 
       if (health.circuitOpen > 0) {
         apiKeyStatus = 'unhealthy';
-      } else if (health.degraded > 0 || alerts.some((a) => a.level === 'critical')) {
+      } else if (alerts.some((a) => a.level === 'critical')) {
         apiKeyStatus = 'degraded';
       }
 
       apiKeyDetails = {
         totalKeys: health.totalKeys,
         healthy: health.healthy,
-        degraded: health.degraded,
         circuitOpen: health.circuitOpen,
         alerts: alerts.length,
       };

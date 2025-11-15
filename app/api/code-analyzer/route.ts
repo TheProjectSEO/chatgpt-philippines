@@ -134,35 +134,22 @@ Provide a comprehensive analysis with:
     // Call Claude API with extended thinking
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 24576, // Must be > budget_tokens (15000 + ~9500 for analysis)
-      temperature: 1, // Required to be 1 when extended thinking is enabled
-      system: [
-        {
-          type: 'text',
-          text: SYSTEM_PROMPT,
-          cache_control: { type: 'ephemeral' }
-        }
-      ],
+      max_tokens: 24576,
+      temperature: 1,
+      system: SYSTEM_PROMPT,
       messages: [
         {
           role: 'user',
           content: userPrompt,
         },
-      ],
-      thinking: {
-        type: 'enabled',
-        budget_tokens: 15000
-      }
+      ]
     });
 
-    // Extract thinking and analysis from response
-    let thinkingContent = '';
+    // Extract analysis from response
     let analysisContent = '';
 
     for (const block of message.content) {
-      if (block.type === 'thinking') {
-        thinkingContent = block.thinking;
-      } else if (block.type === 'text') {
+      if (block.type === 'text') {
         analysisContent = block.text;
       }
     }
@@ -172,7 +159,6 @@ Provide a comprehensive analysis with:
 
     return NextResponse.json({
       analysis: analysisContent,
-      thinking: thinkingContent,
       language,
       count: rateLimitCount,
       usage: {

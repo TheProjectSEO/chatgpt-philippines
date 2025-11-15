@@ -103,9 +103,9 @@ Format your response with:
       info: [] as string[],
     };
 
-    const criticalMatches = analysisText.match(/critical[:\s]+(.+?)(?=\n\n|\n-|\nwarning|$)/gis);
-    const warningMatches = analysisText.match(/warning[:\s]+(.+?)(?=\n\n|\n-|\ninfo|$)/gis);
-    const infoMatches = analysisText.match(/info[:\s]+(.+?)(?=\n\n|\n-|$)/gis);
+    const criticalMatches = analysisText.match(/critical[:\s]+(.+?)(?=\n\n|\n-|\nwarning|$)/gi);
+    const warningMatches = analysisText.match(/warning[:\s]+(.+?)(?=\n\n|\n-|\ninfo|$)/gi);
+    const infoMatches = analysisText.match(/info[:\s]+(.+?)(?=\n\n|\n-|$)/gi);
 
     if (criticalMatches) issues.critical = criticalMatches.map(m => m.trim());
     if (warningMatches) issues.warning = warningMatches.map(m => m.trim());
