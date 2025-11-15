@@ -1,0 +1,165 @@
+'use client';
+
+import { useReportWebVitals } from 'next/web-vitals';
+import { useEffect } from 'react';
+
+export default function WebVitals() {
+  useReportWebVitals((metric) => {
+    // Log to console in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Web Vitals]', metric);
+    }
+
+    // Send to analytics endpoint
+    const body = JSON.stringify({
+      id: metric.id,
+      name: metric.name,
+      value: metric.value,
+      rating: metric.rating,
+      delta: metric.delta,
+      navigationType: metric.navigationType,
+      timestamp: Date.now(),
+      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+      url: typeof window !== 'undefined' ? window.location.href : '',
+    });
+
+    // Use sendBeacon if available (more reliable)
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/analytics/web-vitals', body);
+    } else {
+      // Fallback to fetch with keepalive
+      fetch('/api/analytics/web-vitals', {
+        body,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+      }).catch((error) => {
+        console.error('[Web Vitals] Failed to send:', error);
+      });
+    }
+
+    // Also send to Google Analytics if available
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', metric.name, {
+        event_category: 'Web Vitals',
+        value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+        event_label: metric.id,
+        non_interaction: true,
+      });
+    }
+
+    // Send to Vercel Analytics if available
+    if (typeof window !== 'undefined' && (window as any).va) {
+      (window as any).va('event', {
+        name: metric.name,
+        data: {
+          value: metric.value,
+          rating: metric.rating,
+        },
+      });
+    }
+  });
+
+  // Monitor for performance degradation
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Monitor long tasks (tasks taking >50ms)
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.duration > 50) {
+          console.warn('[Performance] Long task detected:', {
+            duration: entry.duration,
+            startTime: entry.startTime,
+            name: entry.name,
+          });
+
+          // Send to analytics
+          fetch('/api/analytics/performance', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'long-task',
+              duration: entry.duration,
+              startTime: entry.startTime,
+              name: entry.name,
+              timestamp: Date.now(),
+            }),
+            keepalive: true,
+          }).catch(console.error);
+        }
+      }
+    });
+
+    // Observe long tasks
+    try {
+      observer.observe({ entryTypes: ['longtask'] });
+    } catch (e) {
+      // Long tasks not supported in this browser
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return null;
+}
+
+// Utility function to get current Web Vitals scores
+export async function getCurrentWebVitals() {
+  if (typeof window === 'undefined') return null;
+
+  const { getCLS, getFID, getFCP, getLCP, getTTFB } = await import('web-vitals');
+
+  const vitals: any = {};
+
+  await Promise.all([
+    new Promise<void>((resolve) => getCLS((metric) => {
+      vitals.CLS = metric;
+      resolve();
+    })),
+    new Promise<void>((resolve) => getFID((metric) => {
+      vitals.FID = metric;
+      resolve();
+    })),
+    new Promise<void>((resolve) => getFCP((metric) => {
+      vitals.FCP = metric;
+      resolve();
+    })),
+    new Promise<void>((resolve) => getLCP((metric) => {
+      vitals.LCP = metric;
+      resolve();
+    })),
+    new Promise<void>((resolve) => getTTFB((metric) => {
+      vitals.TTFB = metric;
+      resolve();
+    })),
+  ]);
+
+  return vitals;
+}
+
+// Display Web Vitals scores in console (for debugging)
+export async function logWebVitals() {
+  const vitals = await getCurrentWebVitals();
+
+  if (!vitals) {
+    console.log('[Web Vitals] Not available');
+    return;
+  }
+
+  console.group('[Web Vitals] Current Scores');
+  console.log('LCP (Largest Contentful Paint):', vitals.LCP?.value, 'ms', `(${vitals.LCP?.rating})`);
+  console.log('FID (First Input Delay):', vitals.FID?.value, 'ms', `(${vitals.FID?.rating})`);
+  console.log('CLS (Cumulative Layout Shift):', vitals.CLS?.value, `(${vitals.CLS?.rating})`);
+  console.log('FCP (First Contentful Paint):', vitals.FCP?.value, 'ms', `(${vitals.FCP?.rating})`);
+  console.log('TTFB (Time to First Byte):', vitals.TTFB?.value, 'ms', `(${vitals.TTFB?.rating})`);
+  console.groupEnd();
+
+  return vitals;
+}
+
+// Make it available globally in development
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+  (window as any).getWebVitals = getCurrentWebVitals;
+  (window as any).logWebVitals = logWebVitals;
+}

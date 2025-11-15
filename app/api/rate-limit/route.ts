@@ -47,11 +47,16 @@ export async function POST(request: NextRequest) {
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!supabaseUrl || !supabaseServiceKey) {
-      console.error('Missing Supabase configuration');
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      );
+      console.error('[Rate Limit POST] Missing Supabase configuration');
+      console.error(`URL present: ${!!supabaseUrl}, Key present: ${!!supabaseServiceKey}`);
+      // Return free access if config is missing (fail open)
+      return NextResponse.json({
+        count: 0,
+        limit: 10,
+        remaining: 10,
+        blocked: false,
+        warning: 'Configuration issue, free access granted'
+      });
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -72,10 +77,15 @@ export async function POST(request: NextRequest) {
 
     if (fetchError && fetchError.code !== 'PGRST116') {
       console.error('Database query error:', fetchError);
-      return NextResponse.json(
-        { error: 'Database error' },
-        { status: 500 }
-      );
+      // On database errors, allow free access (fail open, not closed)
+      console.log('[Rate Limit] Database error, allowing free access');
+      return NextResponse.json({
+        count: 0,
+        limit: 10,
+        remaining: 10,
+        blocked: false,
+        error: 'Database temporarily unavailable, access granted'
+      });
     }
 
     const now = new Date();
@@ -85,6 +95,7 @@ export async function POST(request: NextRequest) {
       // Check if we need to reset (no existing record or last reset was over 24 hours ago)
       if (!existing || new Date(existing.last_reset) < oneDayAgo) {
         // Create new or reset existing
+        console.log('[Rate Limit] Creating new rate limit entry or resetting expired one');
         const { error: upsertError } = await supabase
           .from('rate_limits')
           .upsert({
@@ -99,12 +110,18 @@ export async function POST(request: NextRequest) {
 
         if (upsertError) {
           console.error('Database upsert error:', upsertError);
-          return NextResponse.json(
-            { error: 'Database error' },
-            { status: 500 }
-          );
+          // On upsert error, still allow the request but log it
+          console.log('[Rate Limit] Upsert error, allowing request anyway');
+          return NextResponse.json({
+            count: 1,
+            limit: 10,
+            remaining: 9,
+            blocked: false,
+            warning: 'Rate limit tracking unavailable'
+          });
         }
 
+        console.log('[Rate Limit] New user or reset - 1/10 queries used');
         return NextResponse.json({
           count: 1,
           limit: 10,
@@ -114,6 +131,7 @@ export async function POST(request: NextRequest) {
       } else {
         // Increment existing
         const newCount = existing.message_count + 1;
+        console.log(`[Rate Limit] Incrementing count to ${newCount}/10`);
 
         const { error: updateError } = await supabase
           .from('rate_limits')
@@ -125,23 +143,34 @@ export async function POST(request: NextRequest) {
 
         if (updateError) {
           console.error('Database update error:', updateError);
-          return NextResponse.json(
-            { error: 'Database error' },
-            { status: 500 }
-          );
+          // On update error, still return the incremented count
+          console.log('[Rate Limit] Update error, returning incremented count anyway');
+          return NextResponse.json({
+            count: newCount,
+            limit: 10,
+            remaining: Math.max(0, 10 - newCount),
+            blocked: newCount >= 10,
+            warning: 'Rate limit tracking may be inaccurate'
+          });
+        }
+
+        const isBlocked = newCount >= 10;
+        if (isBlocked) {
+          console.log('[Rate Limit] User has reached limit (10/10)');
         }
 
         return NextResponse.json({
           count: newCount,
           limit: 10,
           remaining: Math.max(0, 10 - newCount),
-          blocked: newCount >= 10
+          blocked: isBlocked
         });
       }
     }
 
     // Default: check current status
     if (!existing || new Date(existing.last_reset) < oneDayAgo) {
+      console.log('[Rate Limit] Check - New user or expired limit, returning fresh state');
       return NextResponse.json({
         count: 0,
         limit: 10,
@@ -150,6 +179,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    console.log(`[Rate Limit] Check - Current state: ${existing.message_count}/10`);
     return NextResponse.json({
       count: existing.message_count,
       limit: 10,
@@ -158,10 +188,15 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Rate limit API error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    // On any error, fail open (grant access) rather than blocking users
+    console.log('[Rate Limit POST] Unexpected error, granting free access');
+    return NextResponse.json({
+      count: 0,
+      limit: 10,
+      remaining: 10,
+      blocked: false,
+      warning: 'Temporary error, free access granted'
+    });
   }
 }
 
@@ -172,10 +207,15 @@ export async function GET(request: NextRequest) {
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!supabaseUrl || !supabaseServiceKey) {
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      );
+      console.error('[Rate Limit GET] Missing Supabase configuration');
+      // Return free access if config is missing (fail open)
+      return NextResponse.json({
+        count: 0,
+        limit: 10,
+        remaining: 10,
+        blocked: false,
+        warning: 'Configuration issue, free access granted'
+      });
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -183,7 +223,7 @@ export async function GET(request: NextRequest) {
     const ip = getClientIP(request);
     const fingerprint = getBrowserFingerprint(request);
 
-    const { data: existing } = await supabase
+    const { data: existing, error: fetchError } = await supabase
       .from('rate_limits')
       .select('*')
       .or(`ip.eq.${ip},fingerprint.eq.${fingerprint}`)
@@ -191,10 +231,23 @@ export async function GET(request: NextRequest) {
       .limit(1)
       .maybeSingle();
 
+    if (fetchError && fetchError.code !== 'PGRST116') {
+      console.error('[Rate Limit GET] Database error:', fetchError);
+      // On database errors, allow free access (fail open, not closed)
+      return NextResponse.json({
+        count: 0,
+        limit: 10,
+        remaining: 10,
+        blocked: false,
+        warning: 'Database temporarily unavailable, free access granted'
+      });
+    }
+
     const now = new Date();
     const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
     if (!existing || new Date(existing.last_reset) < oneDayAgo) {
+      console.log('[Rate Limit GET] New user or expired limit, granting free access');
       return NextResponse.json({
         count: 0,
         limit: 10,
@@ -203,17 +256,25 @@ export async function GET(request: NextRequest) {
       });
     }
 
+    const isBlocked = existing.message_count >= 10;
+    console.log(`[Rate Limit GET] Existing user: ${existing.message_count}/10, blocked: ${isBlocked}`);
+
     return NextResponse.json({
       count: existing.message_count,
       limit: 10,
       remaining: Math.max(0, 10 - existing.message_count),
-      blocked: existing.message_count >= 10
+      blocked: isBlocked
     });
   } catch (error) {
     console.error('Rate limit check error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    // On any error, fail open (grant access) rather than blocking users
+    console.log('[Rate Limit GET] Error caught, granting free access');
+    return NextResponse.json({
+      count: 0,
+      limit: 10,
+      remaining: 10,
+      blocked: false,
+      warning: 'Temporary error, free access granted'
+    });
   }
 }

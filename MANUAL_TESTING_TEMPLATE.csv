@@ -1,0 +1,135 @@
+Test ID,Category,Tool/Feature,Test Case,Steps,Expected Result,Actual Result,Status,Priority,Tester,Date,Browser,Device,Notes
+T001,Authentication,Signup,User can signup with valid email,"1. Go to /signup
+2. Enter valid email
+3. Enter valid password
+4. Click Sign Up",User account created and redirected to app,,Not Started,P0,,,,,
+T002,Authentication,Login,User can login with valid credentials,"1. Go to /login
+2. Enter email
+3. Enter password
+4. Click Login",User logged in and redirected to app,,Not Started,P0,,,,,
+T003,Authentication,Logout,User can logout,"1. Click user menu
+2. Click Logout",User logged out and redirected to home,,Not Started,P0,,,,,
+T004,Rate Limiting,Guest Limit,Guest user rate limit enforced,"1. Use paraphraser 5 times as guest
+2. Try to use 6th time",Modal shown prompting signup,,Not Started,P0,,,,,
+T005,Tools,Paraphraser,Paraphraser generates valid output,"1. Go to /paraphraser
+2. Enter test text
+3. Click Paraphrase",Paraphrased text appears within 10 seconds,,Not Started,P0,,,,,
+T006,Tools,Essay Writer,Essay writer creates structured essay,"1. Go to /essay-writer
+2. Enter topic
+3. Click Generate",Essay with intro/body/conclusion appears,,Not Started,P0,,,,,
+T007,Tools,Grammar Checker,Grammar checker identifies errors,"1. Go to /grammar-checker
+2. Enter text with errors
+3. Click Check",Errors highlighted with suggestions,,Not Started,P1,,,,,
+T008,Tools,Translator,Translator supports multiple languages,"1. Go to /translator
+2. Select source/target languages
+3. Enter text
+4. Click Translate",Translated text appears,,Not Started,P1,,,,,
+T009,Tools,Math Solver,Math solver shows step-by-step solution,"1. Go to /math-solver
+2. Enter math problem
+3. Click Solve",Solution with steps appears,,Not Started,P1,,,,,
+T010,Tools,Research Paper,Research paper generator creates structured paper,"1. Go to /research-paper
+2. Enter topic
+3. Click Generate",Research paper with citations appears,,Not Started,P1,,,,,
+T011,Tools,Thesis Generator,Thesis generator creates statement,"1. Go to /thesis-generator
+2. Enter topic
+3. Click Generate",Thesis statement appears,,Not Started,P1,,,,,
+T012,Tools,Citation Generator,Citation generator formats correctly,"1. Go to /citation-generator
+2. Select citation style (APA)
+3. Enter source info
+4. Click Generate",Correctly formatted citation appears,,Not Started,P1,,,,,
+T013,Tools,Resume Builder,Resume builder accepts information,"1. Go to /resume-builder
+2. Fill personal info
+3. Add experience
+4. Preview",Resume preview displays correctly,,Not Started,P1,,,,,
+T014,Tools,Cover Letter,Cover letter personalizes content,"1. Go to /cover-letter
+2. Enter job details
+3. Click Generate",Personalized cover letter appears,,Not Started,P1,,,,,
+T015,Tools,Story Generator,Story generator creates narrative,"1. Go to /story-generator
+2. Enter prompt
+3. Click Generate",Story with narrative structure appears,,Not Started,P2,,,,,
+T016,Tools,Poem Generator,Poem generator creates poetry,"1. Go to /poem-generator
+2. Enter theme
+3. Click Generate",Poem appears,,Not Started,P2,,,,,
+T017,Tools,QR Generator,QR code generator creates scannable code,"1. Go to /qr-generator
+2. Enter URL
+3. Click Generate",QR code appears and is scannable,,Not Started,P2,,,,,
+T018,Performance,Home Page,Home page loads quickly,"1. Open https://yourdomain.com
+2. Measure load time",Page loads in <2 seconds,,Not Started,P1,,,,,
+T019,Performance,Tool Page,Tool pages load quickly,"1. Open /paraphraser
+2. Measure load time",Page loads in <2 seconds,,Not Started,P1,,,,,
+T020,Mobile,Navigation,Mobile navigation works,"1. Open site on mobile
+2. Click hamburger menu",Menu opens and all links work,,Not Started,P1,,,iPhone/Android,,
+T021,Mobile,Tool Usage,Tools work on mobile,"1. Open /paraphraser on mobile
+2. Enter text
+3. Submit",Tool works without horizontal scroll,,Not Started,P1,,,iPhone/Android,,
+T022,Security,XSS Prevention,XSS attempts blocked,"1. Enter <script>alert('xss')</script> in input
+2. Submit",Script not executed; safe HTML shown,,Not Started,P0,,,,,
+T023,Security,SQL Injection,SQL injection prevented,"1. Enter SQL injection attempt
+2. Submit",Attempt blocked; error or safe handling,,Not Started,P0,,,,,
+T024,Error Handling,Network Error,Network errors handled gracefully,"1. Disconnect network
+2. Try to use tool",User-friendly error message shown,,Not Started,P1,,,,,
+T025,Error Handling,Empty Input,Empty input validation works,"1. Leave input empty
+2. Click submit",Error message or disabled button,,Not Started,P1,,,,,
+T026,Content,Placeholders,No placeholder text exists,"1. Visit all major pages
+2. Check for ""Lorem ipsum"" or ""TODO""",No placeholder text found,,Not Started,P1,,,,,
+T027,SEO,Meta Tags,All pages have meta descriptions,"1. View page source
+2. Check for meta description tag",Meta description exists and is descriptive,,Not Started,P2,,,,,
+T028,Accessibility,Keyboard Nav,Keyboard navigation works,"1. Use Tab key
+2. Navigate site
+3. Use Enter to activate",All interactive elements accessible,,Not Started,P2,,,,,
+T029,Accessibility,Alt Text,Images have alt text,"1. Inspect images
+2. Check alt attributes",All images have descriptive alt text,,Not Started,P2,,,,,
+T030,Cross-Browser,Chrome,Site works in Chrome,"1. Open site in Chrome
+2. Test core features",All features work correctly,,Not Started,P1,,,Chrome,,
+T031,Cross-Browser,Firefox,Site works in Firefox,"1. Open site in Firefox
+2. Test core features",All features work correctly,,Not Started,P1,,,Firefox,,
+T032,Cross-Browser,Safari,Site works in Safari,"1. Open site in Safari
+2. Test core features",All features work correctly,,Not Started,P1,,,Safari,,
+T033,Cross-Browser,Edge,Site works in Edge,"1. Open site in Edge
+2. Test core features",All features work correctly,,Not Started,P1,,,Edge,,
+T034,Integration,Anthropic API,Anthropic API integration works,"1. Use any AI tool
+2. Check response",Response from Anthropic API received,,Not Started,P0,,,,,
+T035,Integration,Supabase,Database operations work,"1. Signup
+2. Login
+3. Use tool",User data persisted in Supabase,,Not Started,P0,,,,,
+T036,Integration,Auth0,Auth0 authentication works,"1. Login via Auth0
+2. Check session",User authenticated correctly,,Not Started,P0,,,,,
+T037,Tools,Summarizer,Summarizer condenses text,"1. Go to /summarizer
+2. Enter long text
+3. Click Summarize",Shorter summary appears,,Not Started,P1,,,,,
+T038,Tools,Article Rewriter,Article rewriter maintains meaning,"1. Go to /article-rewriter
+2. Enter article
+3. Click Rewrite",Rewritten article with preserved meaning,,Not Started,P1,,,,,
+T039,Tools,Email Writer,Email writer creates professional emails,"1. Go to /email-writer
+2. Enter purpose
+3. Click Generate",Professional email appears,,Not Started,P1,,,,,
+T040,Tools,Business Plan,Business plan generator creates structure,"1. Go to /business-plan
+2. Enter business idea
+3. Click Generate",Structured business plan appears,,Not Started,P2,,,,,
+T041,Tools,Filipino Writer,Filipino writer generates Filipino content,"1. Go to /filipino-writer
+2. Enter topic
+3. Click Generate",Filipino content appears,,Not Started,P1,,,,,
+T042,Tools,Code Generator,Code generator creates functional code,"1. Go to /code-generator
+2. Enter task
+3. Click Generate",Code with syntax highlighting appears,,Not Started,P2,,,,,
+T043,Tools,Homework Helper,Homework helper provides explanations,"1. Go to /homework-helper
+2. Enter question
+3. Click Help",Explanation with steps appears,,Not Started,P2,,,,,
+T044,Tools,Conclusion Generator,Conclusion generator summarizes points,"1. Go to /conclusion-generator
+2. Enter main points
+3. Click Generate",Conclusion paragraph appears,,Not Started,P2,,,,,
+T045,Tools,Introduction Generator,Introduction generator creates hook,"1. Go to /introduction-generator
+2. Enter topic
+3. Click Generate",Introduction with hook appears,,Not Started,P2,,,,,
+T046,UI/UX,Loading States,Loading states shown during processing,"1. Submit any tool
+2. Observe loading state",Spinner or skeleton loader shown,,Not Started,P1,,,,,
+T047,UI/UX,Error Messages,Error messages are user-friendly,"1. Cause an error
+2. Read error message",Non-technical friendly message shown,,Not Started,P1,,,,,
+T048,UI/UX,Success Messages,Success messages shown for actions,"1. Complete an action
+2. Observe feedback",Success message or notification shown,,Not Started,P2,,,,,
+T049,Rate Limiting,Authenticated Limit,Authenticated user rate limit works,"1. Login
+2. Use tool multiple times
+3. Hit limit",Rate limit enforced correctly,,Not Started,P0,,,,,
+T050,Rate Limiting,Reset,Rate limit resets after period,"1. Hit rate limit
+2. Wait 24 hours
+3. Try again",Limit reset and tool works,,Not Started,P1,,,,,"Skip - too long to test"

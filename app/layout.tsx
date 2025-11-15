@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import Providers from '../components/Providers';
 import Navbar from '../components/Navbar';
+import RegisterServiceWorker from './register-sw';
+import { WebVitals } from './web-vitals';
+import { inter, plusJakartaSans } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -33,6 +36,12 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'ChatGPT PH',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_PH',
@@ -57,6 +66,17 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: 'cover',
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#E8844A' },
+    { media: '(prefers-color-scheme: dark)', color: '#D46D38' },
+  ],
 };
 
 export default function RootLayout({
@@ -65,8 +85,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={`${inter.variable} ${plusJakartaSans.variable}`}>
+      <head>
+        {/* PWA Meta Tags */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="ChatGPT PH" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#E8844A" />
+        <meta name="msapplication-tap-highlight" content="no" />
+      </head>
+      <body className={inter.className}>
+        <WebVitals />
+        <RegisterServiceWorker />
         <Navbar />
         <Providers>{children}</Providers>
       </body>
