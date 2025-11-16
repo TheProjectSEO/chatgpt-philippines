@@ -1,5 +1,7 @@
 import { FileText, Users, Eye, TrendingUp } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminDashboard() {
   // TODO: Fetch real stats from database
   const stats = [

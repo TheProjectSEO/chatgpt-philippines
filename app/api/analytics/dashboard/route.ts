@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-export const runtime = 'edge';
+// Using Node.js runtime instead of Edge for better Supabase compatibility
+// export const runtime = 'edge';
 
 // Helper to create Supabase client
 const getSupabaseClient = () => {

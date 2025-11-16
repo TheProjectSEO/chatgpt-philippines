@@ -9,6 +9,7 @@ import {
   Image,
   HelpCircle,
   BarChart,
+  BookOpen,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -21,6 +22,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { label: 'Pages', href: '/admin/pages', icon: FileText },
+  { label: 'Blog Posts', href: '/admin/blog', icon: BookOpen },
   { label: 'SEO', href: '/admin/seo', icon: Settings },
   { label: 'FAQs', href: '/admin/faqs', icon: HelpCircle },
   { label: 'Media', href: '/admin/media', icon: Image },

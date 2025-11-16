@@ -1,0 +1,5861 @@
+{
+  "config": {
+    "configFile": "/Users/adityaaman/Desktop/ChatGPTPH/playwright.config.ts",
+    "rootDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "/Users/adityaaman/Desktop/ChatGPTPH/tests/setup/global-setup.ts",
+    "globalTeardown": "/Users/adityaaman/Desktop/ChatGPTPH/tests/setup/global-teardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "on-failure"
+        }
+      ],
+      [
+        "list",
+        {
+          "printSteps": true
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "setup",
+        "name": "setup",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/global\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Microsoft Edge",
+        "name": "Microsoft Edge",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/adityaaman/Desktop/ChatGPTPH/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "iPad Pro",
+        "name": "iPad Pro",
+        "testDir": "/Users/adityaaman/Desktop/ChatGPTPH/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 7,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3000",
+      "reuseExistingServer": true,
+      "timeout": 120000,
+      "stdout": "ignore",
+      "stderr": "pipe"
+    }
+  },
+  "suites": [
+    {
+      "title": "admin-faqs.spec.ts",
+      "file": "admin-faqs.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Admin FAQs Manager - Page Loading",
+          "file": "admin-faqs.spec.ts",
+          "line": 49,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-220a086a0037d381794d",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-128c81985f474a387a08",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1f9f3eded43ae684ea04",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e9f78470a968a8eb9bb1",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3cb35122ecca44ba6fa4",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-801e5c01118f22ab5e70",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-fb8de1dfdc62b2f804a8",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f3f67ca44d9f5323c3b7",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-63dcaf739f4a813f3f06",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9053ad00f44913244ed3",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d56bcc05e7b229463825",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-bcfe7a56ad6fcb1842fc",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-b5b07af94e339fd0009f",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2c38515eb70c26d05e1a",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0fb8f2fecec1e604ff0d",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a03116dd3f42a29c33ed",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3e3f0ead1fa97d18b7fd",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-90f43d98e0557ba1920e",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0a6beac5223274bb76d7",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-11d9d106d0a9a7b6718a",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0beb5a360132490c2f60",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2ce2342e86d245bfadbd",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-aba1b6c9f7cb284495ba",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-4312af9e7dfab4b1de62",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            },
+            {
+              "title": "should load FAQs manager successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f6acc767f4d9ab96460e",
+              "file": "admin-faqs.spec.ts",
+              "line": 50,
+              "column": 7
+            },
+            {
+              "title": "should display New FAQ button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-af4cd57e1b1381866813",
+              "file": "admin-faqs.spec.ts",
+              "line": 61,
+              "column": 7
+            },
+            {
+              "title": "should display initial FAQ list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-27e3a441c33c02e27cd8",
+              "file": "admin-faqs.spec.ts",
+              "line": 70,
+              "column": 7
+            },
+            {
+              "title": "should load without console errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f50942f89ebcafb84e0e",
+              "file": "admin-faqs.spec.ts",
+              "line": 83,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - FAQ Display",
+          "file": "admin-faqs.spec.ts",
+          "line": 105,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-6a23a8cebbfc4eb4d40c",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ae70f69405c1211962f7",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-dc81a21e32f5608bfcfc",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3203511a35835e5058b3",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            },
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-567a9b9699cd8f00c173",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-27dfdd8347070090e98a",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-fbe105a538720d85e7e0",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a51d1f864dc6be690d59",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            },
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-92e260b6d061a5a8e1da",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5f1229d481f5a3250f1e",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-345c2e52f519296cd7e4",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1642fa3d3dbd0f25e898",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            },
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-33a0996d388860254db8",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-53678a7c8232f2989164",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ac27f4103a5db0be3744",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-39646f46c515f5a10369",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            },
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0bf0b5007bc662d7ca98",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-585aa1ed3dd7d4c8831a",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3b4d4352ee3d6fe87083",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-cd29b8fbb540753c2d95",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            },
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-008df74a208f1971d8a5",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-81963d7104803de0626b",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-014f92a422dae2d4f903",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-8aab35b9967e0ecece22",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            },
+            {
+              "title": "should display FAQ questions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-874fc77b0eb17bb44ad3",
+              "file": "admin-faqs.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "should display category badges",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-63ec6542ac58b7ff5059",
+              "file": "admin-faqs.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "should display order numbers",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a87f8d62bbecc735a841",
+              "file": "admin-faqs.spec.ts",
+              "line": 133,
+              "column": 7
+            },
+            {
+              "title": "should show edit and delete buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-bbadeafc931ed8a2b5cc",
+              "file": "admin-faqs.spec.ts",
+              "line": 144,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Expand/Collapse",
+          "file": "admin-faqs.spec.ts",
+          "line": 161,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-438b8672936dcdf77539",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2d6af4434881961f3343",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-53b06906d9eb5d8023ed",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-4352c28eca444a47a0f1",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-42d225a9b96001a366a4",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-93f9796ac37f088caf0a",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e2681eacbc6275656e2e",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5de84f6c300a071ba15c",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f313c0ae643f1aab8f29",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0803ecf3285261af0801",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-8421054242b62ed1dfb9",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e87b3d89619bea28dbd6",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-fdf7558be2f6a66448d5",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-58c5e76d5657b48477e7",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9311940703c05c6dd960",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2a3dce79775ab053aa62",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-71f0a12ce4c8469a8b38",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1aef74d80c11fdff528d",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1d68e3de435bcd1228b7",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-cd150ef15b6146ca8eb6",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-10138d46fb23ba78281d",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3e0b176bef33522442b9",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-7a5796be1c662c4c186f",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-70d8aa08c1850d12acaf",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "should expand FAQ when question is clicked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-851f914c4c95c1383057",
+              "file": "admin-faqs.spec.ts",
+              "line": 162,
+              "column": 7
+            },
+            {
+              "title": "should collapse FAQ when clicked again",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1756b688434b57a280da",
+              "file": "admin-faqs.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "should rotate chevron icon when expanding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-15ceffba1571e228c09d",
+              "file": "admin-faqs.spec.ts",
+              "line": 201,
+              "column": 7
+            },
+            {
+              "title": "should only expand one FAQ at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-656024f2ef8709c2f760",
+              "file": "admin-faqs.spec.ts",
+              "line": 223,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Category Filtering",
+          "file": "admin-faqs.spec.ts",
+          "line": 250,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-60a0c6303754c0b430bb",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a98ec339835b5598c96b",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0081efad59c795324216",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-954c27ff790139df346b",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            },
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a92bcd22fa9faf3f404e",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-512f07e7955bfaa7cfe5",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9b08e24635a8ccc4c39a",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2f1c086e448b497aa006",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            },
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-aee6bd6b1e4d14f89483",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-230bd4803806b8cb3ac6",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a5fabeb5c2e953bde0a3",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-6ae807234e4056f6d8e6",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            },
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5894577499e9781f3f01",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-8c4e1759ea1b9e2b954c",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-552e277441d16ccc051b",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-bde0fc42af4a8106ed72",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            },
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-829d8ce7c990e1f5e387",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f8e22a90777fd1176abf",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-16c62e8275e1b6afd236",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-bc0c61c0ccb9e6360b8e",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            },
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-be9bd9520312b5c39908",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3ef31f05526ba9804151",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ebe105ae415f469bd94e",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-59fd9a75bf3f9aab97c0",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            },
+            {
+              "title": "should display category filter buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f47e75caed95c0e7a52a",
+              "file": "admin-faqs.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "should filter FAQs by category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9c240ce734d739ce5154",
+              "file": "admin-faqs.spec.ts",
+              "line": 263,
+              "column": 7
+            },
+            {
+              "title": "should show all FAQs when \"All\" is selected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9c54b55c88513e962d37",
+              "file": "admin-faqs.spec.ts",
+              "line": 293,
+              "column": 7
+            },
+            {
+              "title": "should highlight selected category",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-37a96b230a6a5e43dae1",
+              "file": "admin-faqs.spec.ts",
+              "line": 313,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Create FAQ",
+          "file": "admin-faqs.spec.ts",
+          "line": 327,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-17d8fa3710e2c7fc3e99",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-dae51f361a50d67fe690",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-84825a30de7d424f49a9",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-baa0b8f1fd8c50c5a242",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-097f890aac5914e6fe12",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-8312ade5090ad53b9f45",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c4fc22e38cb342ec398e",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-130834b42de11ea30ba1",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-28f55af7f27685747212",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2fd3b01807cd11bd8cbb",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-7ea89c1477ae6f3451e1",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c9a26b19b0d39174c6b3",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2285e82e5244b8843500",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ba7c9d64c33cf72fa73d",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-89a59268c8b27f4657de",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-93785bf916463f04399b",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-93d84c7b1cdfd9f11ab9",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-4991c48929f959c8fea9",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-add95eab7511f10abb87",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-51f5124225fd16f3b97d",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e36da5150f097ae3484b",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2b3b373dcfadcbf8cca3",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-fd1df24aa4e11c80507a",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-42a1105741d5abf8d335",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-da600102e06dc1037dd2",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-66dfd8d52c22c4c78703",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5464f815d5bbfb19016b",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-78e39ddf56e304bf422e",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9f1b601341f11d2a5df5",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ff6b99d27b790338df2d",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e644143e7324776d89b2",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3adc450c30f3c69173f3",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3a2527ee550ee1d3ba4c",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-dda2fe5677d7deee4a8a",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-05319647f0aa1c5a6daa",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f71ae273038bd15e9aba",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9187b4a74d7815810524",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-93d3a054f8dfc8f83252",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-eceda8ee5d6a581f83bc",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-b9d7bb5bcf5eb67c40cb",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d77716c003212065b425",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f3ae3e067458ec050832",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "should open new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c56d701902a19f1fed8c",
+              "file": "admin-faqs.spec.ts",
+              "line": 328,
+              "column": 7
+            },
+            {
+              "title": "should have all form fields in new FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c47873c22aac04041855",
+              "file": "admin-faqs.spec.ts",
+              "line": 338,
+              "column": 7
+            },
+            {
+              "title": "should have empty fields in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d9b86ec5928360744fe1",
+              "file": "admin-faqs.spec.ts",
+              "line": 351,
+              "column": 7
+            },
+            {
+              "title": "should allow filling in new FAQ form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9a5191ffb73084c982d9",
+              "file": "admin-faqs.spec.ts",
+              "line": 368,
+              "column": 7
+            },
+            {
+              "title": "should validate required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-7e4d9ebc8da30bf83107",
+              "file": "admin-faqs.spec.ts",
+              "line": 385,
+              "column": 7
+            },
+            {
+              "title": "should close modal on cancel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ace5881ea790ddfcbbbb",
+              "file": "admin-faqs.spec.ts",
+              "line": 400,
+              "column": 7
+            },
+            {
+              "title": "should show success message on create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-06bf9b9a6f0b125122dc",
+              "file": "admin-faqs.spec.ts",
+              "line": 413,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Edit FAQ",
+          "file": "admin-faqs.spec.ts",
+          "line": 436,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e5ae850cb69040df0435",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ae031fcdf1e3e6d92932",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-78f421513e66cf18d7a1",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ce07235ee403e6317cca",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d2369d96290b1b59c700",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-334ef02e0f3d0494a0a6",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1089d9e6ae405aced362",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            },
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f36ec2dc0c2049d43144",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-20af372f614c004e08e0",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0d5ec9468dededeb7911",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5396aca0c212748fd161",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1f372f620a03fe51d71c",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3198910fd62573b6741f",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9b6b1758c89e26a0d5cb",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            },
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a1a61b58d81400fd5cc3",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ac97241f70d41b28c72e",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-423c4b9ff6d8405b9b05",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c9b2c8c4dd92efd504a1",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-26f9217c4ee5c28e14d3",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-7bf56a7c838521f6051d",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a3255bd943d38b726c88",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            },
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-36bcf73eed3303931dfe",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ded577bf63f0388c676d",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f634903cbf332d53feea",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a681224182a070921d4e",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-37d6984d6e9f8cd26666",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-df08e4b028f0f4d57400",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-fd30e4653f5c5d429d50",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            },
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c9b1acc99d017dfa0690",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-54137e411c4565d86b07",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-39916e20dfe06f5e2d50",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d8056e1adbe7872e6ced",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-485f357eb6a449ced364",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2554fd0d0a78eba9286d",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-8d2e74aef5a33eb19e77",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            },
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3b5ee71c4ae39a179520",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-212f1814355002371b23",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c91ebc238d58254ea4c3",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-84ddf63f884d51f0dcda",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f8b114039ae1282f90f8",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-6bb49f5999c008fb5d70",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1a9f18b5e0b17c5a6a40",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            },
+            {
+              "title": "should open edit FAQ modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-cafbb38df82870ae00db",
+              "file": "admin-faqs.spec.ts",
+              "line": 437,
+              "column": 7
+            },
+            {
+              "title": "should populate form with FAQ data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-14f60e6b709ce7bee03a",
+              "file": "admin-faqs.spec.ts",
+              "line": 447,
+              "column": 7
+            },
+            {
+              "title": "should allow editing FAQ fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-38974cddf4b39519411b",
+              "file": "admin-faqs.spec.ts",
+              "line": 465,
+              "column": 7
+            },
+            {
+              "title": "should have all category options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a1b0fcb2bffac1d220be",
+              "file": "admin-faqs.spec.ts",
+              "line": 487,
+              "column": 7
+            },
+            {
+              "title": "should validate edited fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-b951d231dc0a2225bf5d",
+              "file": "admin-faqs.spec.ts",
+              "line": 505,
+              "column": 7
+            },
+            {
+              "title": "should show success message on save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e45ed0fab6da66956ca3",
+              "file": "admin-faqs.spec.ts",
+              "line": 523,
+              "column": 7
+            },
+            {
+              "title": "should close modal after save",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c5a9c9edac5dfc3eceb8",
+              "file": "admin-faqs.spec.ts",
+              "line": 541,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Delete FAQ",
+          "file": "admin-faqs.spec.ts",
+          "line": 560,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a6854c7544c29303ce7e",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0cb09625d5c3cef2ea2e",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ecdbfb6cf54c24b7c674",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            },
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2f9f73294fbe7c621c70",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9001228d2235d6dfedb7",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a0199dfdd371087ab9f8",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            },
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-7a40e3d644a7f80a288c",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ebc28bbaa22bc120b16a",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-b6d53e814e1b0d06796a",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            },
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-293cf405cc0293e78df7",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d5951c0f8d1bd26e397c",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a2432ce1fa6fbe56d033",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            },
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5127d569438af03e7993",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ec765eb83f6abb18b502",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-303aa372e98043595056",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            },
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-984fae925bd572a0dd7e",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ecdb6e10e2931ea83a4d",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1490605f8087fd9fbf25",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            },
+            {
+              "title": "should show delete confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-089279076e1ccd366764",
+              "file": "admin-faqs.spec.ts",
+              "line": 561,
+              "column": 7
+            },
+            {
+              "title": "should not delete when confirmation is cancelled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-7aa15c9ba33d3e688e1c",
+              "file": "admin-faqs.spec.ts",
+              "line": 578,
+              "column": 7
+            },
+            {
+              "title": "should show success message on delete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-915a8e4f6a509b417220",
+              "file": "admin-faqs.spec.ts",
+              "line": 598,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Responsive Design",
+          "file": "admin-faqs.spec.ts",
+          "line": 626,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-710b777ea983e99fc545",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1c3726b3f9f8fd5b6206",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c292f5df5ee236e8a553",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-cd3aaf5af52867b041c3",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-dc0e21e3cd3436b3d8e7",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-56c0a622b627fa96b107",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2007b3315278cc32a86f",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f6c3cc24c38332865152",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c5e7ddaf4cebf6ea0e90",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f72681d08a1c34855777",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-b481ae2aeb14f107b074",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-6f9cd03be258f3a4f3e5",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-76369fc7b29e4335bb19",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-2c67af130e57e7cf0c99",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3e521255c8af36ea1fb4",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-82c8d0a1de4b13826d28",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-97d441447938335ff08a",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c20932816b93b1349e7d",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            },
+            {
+              "title": "should be responsive on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d623b3fea1db2972e874",
+              "file": "admin-faqs.spec.ts",
+              "line": 627,
+              "column": 7
+            },
+            {
+              "title": "should display all elements on mobile",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-e26a7de4cd2fe414bac5",
+              "file": "admin-faqs.spec.ts",
+              "line": 640,
+              "column": 7
+            },
+            {
+              "title": "should work on tablet viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-d5fe4c5f8107a4475e31",
+              "file": "admin-faqs.spec.ts",
+              "line": 651,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Admin FAQs Manager - Accessibility",
+          "file": "admin-faqs.spec.ts",
+          "line": 663,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-0b92e4de553dea9fc06b",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-26cd409afcd7a42543ad",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-647a18bb545ea0018833",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-b9ecf13fcc984c1cb014",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            },
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f6dc496339f7ae9054a9",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1a627438e0d6a81b7ee9",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1da0ff6895b71d3f664a",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-3f727b0df414167f85be",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            },
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-addd346baf862f13a63c",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9f9bb52d91b82bc5b133",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-5439cbb22cf93efd9613",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-12833112732c78d74264",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            },
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-bd9d173b389915a7ad0a",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-44a5059d90558fdc91dc",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-cccc175736cb520a37a0",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-f8f0294848166a7ac596",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            },
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a0512082ceed0bb1b921",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-9b01cd11ecfaa83bef2c",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-4605efea375b4fb674dd",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-fcb51018b2e89d262a9d",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            },
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-c53a9a8b6143938fd274",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-6cd2452ba4f20c03952a",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-a7f9d41adb59df21ead3",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-4c2c845662078a7e187a",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            },
+            {
+              "title": "should have proper ARIA labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-1eba2732f1b6d9a2e3cc",
+              "file": "admin-faqs.spec.ts",
+              "line": 664,
+              "column": 7
+            },
+            {
+              "title": "should support keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-07dd4aaa2d641be44f04",
+              "file": "admin-faqs.spec.ts",
+              "line": 681,
+              "column": 7
+            },
+            {
+              "title": "should have proper heading hierarchy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-6fbe003d77bf35d0d650",
+              "file": "admin-faqs.spec.ts",
+              "line": 692,
+              "column": 7
+            },
+            {
+              "title": "should have accessible form labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "iPad Pro",
+                  "projectName": "iPad Pro",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fa494fbd3df78a98440c-ba57f8a97a1196d3a17b",
+              "file": "admin-faqs.spec.ts",
+              "line": 706,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-16T04:17:48.090Z",
+    "duration": 12.446000000000026,
+    "expected": 0,
+    "skipped": 280,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
